@@ -6,30 +6,29 @@
 
 #ifndef GROCERY_H
 #define GROCERY_H
+#include "array"
+#include "vector"
+#include "string"
 
+class Producto{
+    std::string id;
+    std::string nombre;
+    std::string caducidad;
+    std::string tipo;
+};
 
-class Admin{
+class Tienda{
+	public:
+    explicit Tienda(std::string& name const):
+    nombre{name}{
 
-	public: 
-	int[] getPrice();
-	void sell();
-
-	
-	private:
-	void addProduct();
-	void editprice();
-	
-
-}
-
-
-
-
-
+    }
 
 
 
 
+    std::string nombre;
+};
 
 
 
