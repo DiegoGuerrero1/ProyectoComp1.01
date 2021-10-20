@@ -16,33 +16,33 @@ int main() {
         case 1:
  			cout << "Ingrese la contrasena del administrador" << endl;
  			cin >> pass;
+ 			while  (pass != "grocerY"){
+		cout << "Contraseña incorrecta. \n Intente de nuevo: \n" << endl;
+		cin >> pass; 
+	}
  			if (pass == "grocerY"){ 
- 			do {	
+ 	
             cout << "Acciones disponibles: \n [1] Agregar Productos \n [2] Actualizar precios \n [3] Ver inventario \n [4] Venta \n Ingresa el número:" <<endl;
 	     cin >> mode;
 	    switch(mode){
 		    case 1: 
-			    cout << "Agregar producto" << endl; //Aquí van los métodos 
+			    cout << "Agregar producto \n" << endl; //Aquí van los métodos 
 			    break;
 		    case 2:
-			    cout << " \n" << endl; //Y aquí va a estar el modo de agregar, que tomaremos de la clase Tienda
+			    cout << "Actualizar precios: \n" << endl; //Y aquí va a estar el modo de agregar, que tomaremos de la clase Tienda
 			    break; 
 			case 3:
-				cout << "INVENTARIO" << endl;
+				cout << "Inventario: \n" << endl;
 				break;
 			case 4:
-				cout << "Venta" << endl;
+				cout << "Venta \n" << endl;
 		    default: 
-			    cout << "Seleccione una opcion correcta" << endl ; 
+			    cout << "Seleccione una opcion correcta\n" << endl ; 
 				    break;
 	    } //llave final del switch de administrador
-	} //llave final del ciclo do 
-	while (pass=="grocerY"); 
+ 
 } //llave final del if
- else {
-	cout << "Contrasena incorrecta. Intente de nuevo \n Solo tienes un intento mas\n";
-	cin >> pass;
-}
+
 break;
 
         case 2: 
@@ -50,10 +50,10 @@ break;
 	    cin >> mode;
 	    switch (mode){
 	    	case 1:
-	    		cout << "Vender producto"
+	    		cout << "Vender producto";
 	    		break;
 	    	case 2:
-	    		cout << "Agregar producto"
+	    		cout << "Agregar producto";
 	    		break;
 		}
 		break; 
