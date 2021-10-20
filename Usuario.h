@@ -16,7 +16,7 @@ using namespace std;
 
 class Usuario{
 public:
-    explicit Usuario(std::string nombreUsuario const, std::string contraseña );
+    explicit Usuario(std::string nombreUsuario const, std::string contraseña, bool);
     //métodos get y set
     void setuName(std::string&);
     void editPassword(std::string&, std::string&); //Nueva contraseña, contraseña anterior
