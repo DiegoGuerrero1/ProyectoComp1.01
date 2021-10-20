@@ -50,7 +50,7 @@ private:
     std::string uName;
 
 
-
+//Creo que ya está (por ahora)
 };
 
 
