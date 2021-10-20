@@ -82,21 +82,19 @@ float Usuario::sellProducts(vector<Producto> inventarioB, int &busquedaId, const
             break;
         }
     }
-    for(unsigned long i{0}; i >= carrito.size(); i++){
-        cuenta += carrito[i].getPrice();
+    cout << "¿Pago recibido? s:si, n:no"<< endl;
+    cin >> vendido;
+    if (vendido =='s'){
+
+    } else{
+        cout << "Operación cancelada" <<endl;
+        vaciarCarrito();
     }
-   tUser.
-
-    if(vendido){
-        for(unsigned long i ; i >= carrito.size(); i++){
-            tUser.findProductbyId();
 
 
-        }
-    }
-    vaciarCarrito();
    // return cuenta;
 }
+
 
 void Usuario::vaciarCarrito() {
     carrito.clear();

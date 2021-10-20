@@ -48,6 +48,7 @@ private:
     float cuenta;
     vector<Producto&> productsFound; //
     unsigned long productsFoundIndex;
+    char &vendido;
 
 
 
