@@ -17,7 +17,6 @@ public:
     //Métodos  set y get (Omitir en el diseño del menú)
 
     void settName(std::string&);
-    Producto getProducto(std::string , vector<Producto>);
     void setInventario(Producto);
     vector<Producto> getInv();
     std::string getName();

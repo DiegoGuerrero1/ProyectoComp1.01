@@ -14,10 +14,11 @@ using namespace std;
 using namespace std;
 //Declaración de Constructures de las clases
 
-Producto::Producto(int id, string& caducidad, std::string& nombreItem) {
+Producto::Producto(int id, string& caducidad, std::string& nombreItem, float &precioItem) {
     setId(id);
     setExpd(caducidad);
     setpName(nombreItem);
+    setPrice(precioItem);
 }
 
 void Producto::setId(int& itemId) {
@@ -43,6 +44,11 @@ std::string Producto::getExpd() {
 
 std::string Producto::getpName() {
     return nombreProductoR;
+}
+
+void Producto::setPrice(float &precio) {
+    precioR = precio;
+
 }
 
 
