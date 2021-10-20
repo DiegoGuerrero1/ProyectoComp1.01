@@ -3,28 +3,39 @@
 //
 
 
-#include "Producto.h"
+
 #include <iostream>
+#include <string>
+#include "Producto.h"
+
+using namespace std;
 
 
 using namespace std;
 //Declaración de Constructures de las clases
 
-Producto::Producto(int id, const std::string& expiration) {
-setId();
-setExpd();
+Producto::Producto(int id, string& caducidad, std::string& nombreItem) {
+setId(id);
+setExpd(caducidad);
 }
 
-void Producto::setId(int) {
+void Producto::setId(int itemId) {
+    idR = itemId;
+}
+
+void Producto::setExpd(std::string& expd) {
+    caducidadR = expd;
 
 }
 
-void Producto::setExpd(std::string&) {
-
+int Producto::getId() {
+    return idR;
 }
 
-void Producto::getId(std::string) {
+std::string Producto::getExpd() {
 
+    return caducidadR;
 }
+
 
 

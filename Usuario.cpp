@@ -1,9 +1,11 @@
-
-#include "Usuario.h"
-
-using namespace std; //
+//
 // Created by guerrero on 10/19/21.
 //
+
+#include "Usuario.h"
+#include <string>
+using namespace std;
+
 
 
 Usuario::Usuario(std::string nombreUsuario, std::string contraseña) {

@@ -15,15 +15,18 @@ using namespace std;
 //Definición de la clase Producto
 class Producto{
 public:
-    explicit Producto(int id, const std::string& caducidad);  //Creamos constructor default
+    Producto(int, string&, std::string&);  //Creamos constructor default
     //métodos set() y get()
     void setId(int);
     void setExpd(std::string&);
-    void getId(std::string);
-private:
-    int id;
-    std::string caducidad;
+    int getId();
+    std::string getExpd();
 
+
+private:
+    int idR;
+    string caducidadR;
+    string itemName;
 
 };
 
