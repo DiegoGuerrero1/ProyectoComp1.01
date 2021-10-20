@@ -16,14 +16,16 @@ using namespace std;
 
 class Usuario{
 public:
-    explicit Usuario(std::string nombreUsuario, std::string contraseña, bool);
+    explicit Usuario(std::string ="", std::string = "", bool = false, char ='n');
     //métodos get y set
     void setuName(std::string&);
     void setPassword(std::string);
     void setAdmin(bool);
+    std::string getUsrName();
     void editPassword(std::string&, std::string&); //Nueva contraseña, contraseña anterior
     void editName(std::string&, std::stringn&); //Nombre, Contraseña
     void setSold(char);
+
     //void setInventario(const Producto&, vector<Producto>); Implementada en Tienda
     void llenarCarrito(vector<Producto>, int&, Usuario ); // Inventario, nombre del producto a cambiar
     bool isAdmin();
@@ -35,15 +37,20 @@ public:
     void setFoundProduct(Producto &product);
     void clearFoundProduct();
     void removeProduct(int&, vector<Producto>);
+    void makeAdmin(char);
+
 
 
 
     //getInv();
 
 
+    void makeAdmin(char);
+
+
 private:
-    std::string uPassword;
-    std::string uName const;
+    std::string uPassword{""};
+    std::string uName{""};
     bool admin const; //Constante porque no se puede cambiar, al menos por ahora no.
     float venta;
     vector<Producto> carrito;
@@ -52,12 +59,9 @@ private:
     vector<Producto&> productsFound; //
     unsigned long productsFoundIndex;
     char &vendido;
-    bool &sold;
+    bool &sold{false};
     char padm;
-
-
-
-
+    std::string defaultPassword;
 
 
 };

@@ -10,8 +10,6 @@
 using namespace std;
 //Definición de constructor
 Tienda::Tienda(std::string &tnombre, Producto firstItem, vector<Producto> invAct, Usuario usrAct) {
-    settName(tnombre);
-    setInventario(firstItem, invAct, usrAct);
 
 }
 

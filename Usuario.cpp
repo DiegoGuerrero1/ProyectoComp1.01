@@ -14,12 +14,6 @@ using namespace std;
 //
 Usuario::Usuario(std::string nombreUsuario, std::string contraseña, bool admin, char sold) {
 
-    setuName(nombreUsuario);
-    setPassword(contraseña);
-    setAdmin(admin);
-    setSold(sold);
-
-
 }
 
 void Usuario::setuName(string &userName) {
@@ -166,6 +160,33 @@ void Usuario::setSold(char s) {
         sold = false;
     }
 }
+
+void Usuario::makeAdmin(char madmin) {
+
+        switch (madmin) {
+            case 's':
+                setAdmin(true);
+                break;
+            case 'n':
+                setAdmin(false);
+                break;
+            case 'c':
+                break;
+            default:
+                cout << "Opción no válida, asignando empleado " << endl;
+                break;
+
+        }
+
+
+
+}
+
+std::string Usuario::getUsrName() {
+    return uName;
+}
+
+
 
 
 

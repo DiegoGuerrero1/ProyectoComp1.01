@@ -5,16 +5,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <conio.h>
-#include <windows.h>
+#include <curses.h>
+//#include <conio.h>
+//#include <windows.h>
 #include <iomanip>
 
-/* Dejaremos esto en commentario por lo mientras
+
 #include "Producto.h"
 #include "Tienda.h"
 #include "Usuario.h"
-#include "Grocery.h"
-*/
+// #include "Grocery.h"
+
 using namespace std;
 
 //FUNCIONES MENU ADMIN Y MENU TRAB, TAMBIÉN SE PUEDE PASAR A OTRO CPP PARA HACER MAS FANCY EL MAIN ;D
