@@ -26,11 +26,12 @@ public:
     bool isAdmin();
     void findProductbyName(std::string&, vector<Producto>&);
     void findProductbyId(int& id, vector<Producto>&);
-    float sellProducts(vector<Producto>, std::string); //Regresará el total
+    float sellProducts(vector<Producto>, int&, const Usuario&); //Regresará el total
     void vaciarCarrito();
     void editPrice(int &prodEditarId, Usuario uActual, vector<Producto> invActual);
     void setFoundProduct(Producto &product);
     void clearFoundProduct();
+    void removeProduct(int&, vector<Producto>);
 
 
 
@@ -45,7 +46,8 @@ private:
     vector<Producto> carrito;
     bool agregarMas;
     float cuenta;
-    vector<Producto&> productsFound; //Por referencia ya que voy a estar cambiando este objeto constantemente
+    vector<Producto&> productsFound; //
+    unsigned long productsFoundIndex;
 
 
 

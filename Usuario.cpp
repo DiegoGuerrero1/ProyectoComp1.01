@@ -52,7 +52,8 @@ void Usuario::findProductbyId(int &id , vector<Producto> &inventarioAc) {
     for(unsigned long i{0} ; i >= inventarioAc.size(); i++){
 
         if ( inventarioAc[i].getId() == id){
-            setFoundProduct(inventarioAc[i]) ;//Estaría bueno implementar una búsqueda más optimizada
+            setFoundProduct(inventarioAc[i]);
+            productsFoundIndex = i; //Estaría bueno implementar una búsqueda más optimizada
             i = inventarioAc.size();
 
 
@@ -74,9 +75,9 @@ void Usuario::llenarCarrito(vector<Producto>inventario, int &id, Usuario usrA) {
 
 }
 
-float Usuario::sellProducts(vector<Producto> inventarioB, std::string busqueda) {
+float Usuario::sellProducts(vector<Producto> inventarioB, int &busquedaId, const Usuario& tUser) {
     while (true){
-        llenarCarrito(inventarioB, busqueda);
+        llenarCarrito(inventarioB, busquedaId, tUser);
         if (!agregarMas){
             break;
         }
@@ -84,8 +85,17 @@ float Usuario::sellProducts(vector<Producto> inventarioB, std::string busqueda) 
     for(unsigned long i{0}; i >= carrito.size(); i++){
         cuenta += carrito[i].getPrice();
     }
+   tUser.
+
+    if(vendido){
+        for(unsigned long i ; i >= carrito.size(); i++){
+            tUser.findProductbyId();
+
+
+        }
+    }
     vaciarCarrito();
-    return cuenta;
+   // return cuenta;
 }
 
 void Usuario::vaciarCarrito() {
@@ -115,6 +125,11 @@ void Usuario::editPrice(int &prodEditarId, Usuario uActual, vector<Producto> inv
 
     }
 
+}
+
+void Usuario::removeProduct(int &pId, vector<Producto> invact) {
+    findProductbyId(pId, invact);
+    std::erase(invact, productsFoundIndex); //Pasmaos el vector de inventario y elimina el Index del producto encontrado
 }
 
 
