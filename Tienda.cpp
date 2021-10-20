@@ -5,6 +5,7 @@
 #include <string>
 #include <iostream>
 #include "Producto.h"
+#include "Usuario.h"
 #include <vector>
 using namespace std;
 //Definición de constructor
@@ -23,8 +24,11 @@ vector<Producto> Tienda::getInv() {
     return inventarioR;
 }
 
-void Tienda::setInventario(Producto unProducto) {
-    inventarioR.push_back(unProducto);
+void Tienda::setInventario(const Producto& unProducto, vector<Producto> inventarioActual, Usuario usuarioActual) {
+    if (usuarioActual.isAdmin()){
+        inventarioActual.push_back(unProducto);
+    }
+
 }
 
 std::string Tienda::getName() {

@@ -17,15 +17,15 @@ public:
     //Métodos  set y get (Omitir en el diseño del menú)
 
     void settName(std::string&);
-    void setInventario(Producto);
     vector<Producto> getInv();
+    void setInventario(const Producto&, vector<Producto>, Usuario);
     std::string getName();
+
 
 
 private:
     std::string nombreTiendaR;
     vector<Producto> inventarioR;
-
 };
 
 

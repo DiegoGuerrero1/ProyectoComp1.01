@@ -7,6 +7,7 @@
 #include <iostream>
 #include <string>
 #include "Producto.h"
+#include "Usuario.h"
 
 using namespace std;
 
@@ -51,7 +52,7 @@ void Producto::setPrice(float &precio) {
 
 }
 
-float Producto::getPrice() {
+float Producto::getPrice() const {
     return precioR;
 }
 

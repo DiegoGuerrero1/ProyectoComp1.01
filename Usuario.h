@@ -21,11 +21,18 @@ public:
     void setuName(std::string&);
     void editPassword(std::string&, std::string&); //Nueva contraseña, contraseña anterior
     void editName(std::string&, std::stringn&); //Nombre, Contraseña
-    //void addProducts(); Implementada en Tienda
-  void llenarCarrito(vector<Producto>, std::string); // Inventario, nombre del producto a cambiar
-
+    //void setInventario(const Producto&, vector<Producto>); Implementada en Tienda
+    void llenarCarrito(vector<Producto>, int&, Usuario ); // Inventario, nombre del producto a cambiar
+    bool isAdmin();
+    void findProductbyName(std::string&, vector<Producto>&);
+    void findProductbyId(int& id, vector<Producto>&);
     float sellProducts(vector<Producto>, std::string); //Regresará el total
     void vaciarCarrito();
+    void editPrice(int &prodEditarId, Usuario uActual, vector<Producto> invActual);
+    void setFoundProduct(Producto &product);
+    void clearFoundProduct();
+
+
 
     //getInv();
 
@@ -38,6 +45,9 @@ private:
     vector<Producto> carrito;
     bool agregarMas;
     float cuenta;
+    vector<Producto&> productsFound; //Por referencia ya que voy a estar cambiando este objeto constantemente
+
+
 
 
 

@@ -29,16 +29,48 @@ void Usuario::editName(string &currentPassword, std::string &newName) {
     }
 
 }
+void Usuario::setFoundProduct(Producto &product) {
+    productsFound[0] = product;
+}
 
-void Usuario::llenarCarrito(vector<Producto>inventario, std::string nombre) {
+void Usuario::findProductbyName(string &nombre, vector<Producto> &inventario) {
+    for(unsigned long i{0} ; i >= inventario.size(); i++){
 
-        for(unsigned long i{0} ; i >= inventario.size(); i++){
+        if ( inventario[i].getpName() == nombre){
+            i = inventario.size();
+            setFoundProduct(inventario[i]) ;         //Estaría bueno implementar una búsqueda más optimizada
 
-            if ( inventario[i].getpName() == nombre){
-                 carrito.push_back(inventario[i]);
-                i = inventario.size();
-            }
+        }else{
+            clearFoundProduct();
+
         }
+
+    }
+
+}
+void Usuario::findProductbyId(int &id , vector<Producto> &inventarioAc) {
+    for(unsigned long i{0} ; i >= inventarioAc.size(); i++){
+
+        if ( inventarioAc[i].getId() == id){
+            setFoundProduct(inventarioAc[i]) ;//Estaría bueno implementar una búsqueda más optimizada
+            i = inventarioAc.size();
+
+
+        }else{
+            clearFoundProduct();
+
+        }
+
+    }
+
+}
+
+
+
+void Usuario::llenarCarrito(vector<Producto>inventario, int &id, Usuario usrA) {
+
+   usrA.findProductbyId(id, inventario);
+   carrito = productsFound;
 
 }
 
@@ -60,5 +92,34 @@ void Usuario::vaciarCarrito() {
     carrito.clear();
 
 }
+
+bool Usuario::isAdmin() {
+    if(!admin){
+        return false;
+    }else{
+        return true;
+    };
+
+}
+
+void Usuario::clearFoundProduct() {
+    productsFound.clear();
+    cout << "No se encontró ningún producto."<<endl;
+}
+
+void Usuario::editPrice(int &prodEditarId, Usuario uActual, vector<Producto> invActual) {
+    if (!uActual.isAdmin()){
+        cout << "El usuario no es administrador"<< endl;
+    }else{
+        findProductbyId(prodEditarId, invActual);
+
+    }
+
+}
+
+
+
+
+
 
 
