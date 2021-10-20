@@ -1,6 +1,6 @@
 //
 // Created by guerrero on 10/19/21.
-//
+//Tienda.h
 
 #ifndef PROYECTOCOMP1_01_TIENDA_H
 #define PROYECTOCOMP1_01_TIENDA_H
@@ -12,24 +12,20 @@
 using namespace std;
 class Tienda{
 public:
-    explicit Tienda(std::string& nombreTienda);
+    Tienda(std::string&, Producto);
 
     //Métodos  set y get (Omitir en el diseño del menú)
-    void setName(std::string&);
-    std::string getName(std::string);
-    Producto getProducto(int, vector <Producto>);
 
+    void settName(std::string&);
+    Producto getProducto(std::string , vector<Producto>);
+    void setInventario(Producto);
+    vector<Producto> getInv();
+    std::string getName();
 
-    //Métodos Principales
-    void vender();
-    vector<Producto> getInv(Tienda);
-   void buscarProducto(Producto);
-    void editPrecios();
-    void agregarProductos(Producto);
 
 private:
-    std::string Name;
-    vector<Producto> inventario;
+    std::string nombreTiendaR;
+    vector<Producto> inventarioR;
 
 };
 
