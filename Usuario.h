@@ -22,10 +22,10 @@ public:
     void editPassword(std::string&, std::string&); //Nueva contraseña, contraseña anterior
     void editName(std::string&, std::stringn&); //Nombre, Contraseña
     //void addProducts(); Implementada en Tienda
-    vector<Producto> getProducts(vector<Producto>, std::string); // Inventario, nombre del producto a cambiar
+  void llenarCarrito(vector<Producto>, std::string); // Inventario, nombre del producto a cambiar
 
-    float sellProducts(vector<Producto>); //Regresará el total
-    void vaciarCarrito(vector<Producto>);
+    float sellProducts(vector<Producto>, std::string); //Regresará el total
+    void vaciarCarrito();
 
     //getInv();
 
@@ -36,6 +36,8 @@ private:
     bool admin const; //Constante porque no se puede cambiar, al menos por ahora no.
     float venta;
     vector<Producto> carrito;
+    bool agregarMas;
+    float cuenta;
 
 
 

@@ -30,7 +30,7 @@ void Usuario::editName(string &currentPassword, std::string &newName) {
 
 }
 
-vector<Producto> Usuario::getProducts(vector<Producto>inventario, std::string nombre) {
+void Usuario::llenarCarrito(vector<Producto>inventario, std::string nombre) {
 
         for(unsigned long i{0} ; i >= inventario.size(); i++){
 
@@ -40,14 +40,23 @@ vector<Producto> Usuario::getProducts(vector<Producto>inventario, std::string no
             }
         }
 
-    return carrito;
 }
 
-float Usuario::sellProducts(vector<Producto>) {
-    return 0;
+float Usuario::sellProducts(vector<Producto> inventarioB, std::string busqueda) {
+    while (true){
+        llenarCarrito(inventarioB, busqueda);
+        if (!agregarMas){
+            break;
+        }
+    }
+    for(unsigned long i{0}; i >= carrito.size(); i++){
+        cuenta += carrito[i].getPrice();
+    }
+    vaciarCarrito();
+    return cuenta;
 }
 
-void Usuario::vaciarCarrito(vector<Producto>) {
+void Usuario::vaciarCarrito() {
     carrito.clear();
 
 }

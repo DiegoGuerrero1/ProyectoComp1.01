@@ -51,6 +51,10 @@ void Producto::setPrice(float &precio) {
 
 }
 
+float Producto::getPrice() {
+    return precioR;
+}
+
 
 
 
