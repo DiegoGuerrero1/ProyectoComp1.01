@@ -4,6 +4,9 @@
 
 #ifndef PROYECTOCOMP1_01_USUARIO_H
 #define PROYECTOCOMP1_01_USUARIO_H
+#include <string>
+
+using namespace std;
 
 class Usuario{
 public:

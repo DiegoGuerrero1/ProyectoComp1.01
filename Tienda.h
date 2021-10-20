@@ -4,6 +4,8 @@
 
 #ifndef PROYECTOCOMP1_01_TIENDA_H
 #define PROYECTOCOMP1_01_TIENDA_H
+
+using namespace std;
 class Tienda{
 public:
     explicit Tienda(std::string& nombreTienda);

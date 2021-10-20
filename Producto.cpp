@@ -5,7 +5,9 @@
 
 #include "Producto.h"
 #include <iostream>
-#include "Producto.h"
+
+
+using namespace std;
 //Declaración de Constructures de las clases
 
 Producto::Producto(int id, const std::string& expiration) {
@@ -21,14 +23,8 @@ void Producto::setExpd(std::string&) {
 
 }
 
-
-
-
-Usuario::Usuario(std::string nombreUsuario, std::string contraseña) {
+void Producto::getId(std::string) {
 
 }
 
-Tienda::Tienda(string &nombreTienda) {
 
-
-}

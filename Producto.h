@@ -19,7 +19,7 @@ public:
     //métodos set() y get()
     void setId(int);
     void setExpd(std::string&);
-    void getId();
+    void getId(std::string);
 private:
     int id;
     std::string caducidad;
