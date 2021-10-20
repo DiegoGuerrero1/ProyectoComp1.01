@@ -186,6 +186,21 @@ std::string Usuario::getUsrName() {
     return uName;
 }
 
+std::string Usuario::getDefPassword() {
+    return defaultPassword;
+}
+
+bool Usuario::isThePasword(std::string testPassword) {
+    if(uPassword != testPassword){
+        return false;
+    }else{
+        return true;
+    }
+
+}
+
+
+
 
 
 

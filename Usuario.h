@@ -16,7 +16,7 @@ using namespace std;
 
 class Usuario{
 public:
-    explicit Usuario(std::string ="", std::string = "", bool = false, char ='n');
+    explicit Usuario(std::string ="parosinohaypresenciales", std::string = "", bool = false, char ='n'); //Constructor default
     //métodos get y set
     void setuName(std::string&);
     void setPassword(std::string);
@@ -29,6 +29,8 @@ public:
     //void setInventario(const Producto&, vector<Producto>); Implementada en Tienda
     void llenarCarrito(vector<Producto>, int&, Usuario ); // Inventario, nombre del producto a cambiar
     bool isAdmin();
+    std::string getDefPassword();
+    bool isThePasword(std::string); //Dice si es igual o no a la contraseña sin exponerla
     void findProductbyName(std::string&, vector<Producto>&);
     void findProductbyId(int& id, vector<Producto>&);
     float sellProducts(vector<Producto>, int&, const Usuario&); //Regresará el total
@@ -61,7 +63,8 @@ private:
     char &vendido;
     bool &sold{false};
     char padm;
-    std::string defaultPassword;
+
+    std::string defaultPassword = "parosinohaypresenciales";
 
 
 };

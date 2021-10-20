@@ -11,10 +11,8 @@
 
 using namespace std;
 class Tienda{
-public:
-    Tienda(std::string&, Producto, vector<Producto> , );
 
-    //Métodos  set y get (Omitir en el diseño del menú)
+    Tienda(string &tnombre, Producto firstItem, vector<Producto> invAct, Usuario usuarioDefault);
 
     void settName(std::string&);
     vector<Producto> getInv();
@@ -26,10 +24,14 @@ public:
 private:
     std::string nombreTiendaR;
     vector<Producto> inventarioR;
+
+    //Default vars
+    std::string defNombreTienda = "Tienda default";
+
 };
 
 
-
+}
 
 
 
