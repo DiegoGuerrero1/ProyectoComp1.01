@@ -19,24 +19,23 @@ public:
     explicit Usuario(std::string nombreUsuario const, std::string contraseña );
     //métodos get y set
     void setuName(std::string&);
-    void setnPassword(std::string, std::string); //Necesita dos strings, una es la contraseña anterior y la otra es la nueva
-
-    //Métodos principales
-    void editPassword(std::string&, std::std::string&); //Nueva contraseña, contraseña anterior
-    void editName(std::std::string&, std::std::stringn&); //Nombre, Contraseña
+    void editPassword(std::string&, std::string&); //Nueva contraseña, contraseña anterior
+    void editName(std::string&, std::stringn&); //Nombre, Contraseña
     //void addProducts(); Implementada en Tienda
-    vector<Producto> getProducts(vector<Producto>, std::std::string); // Inventario, nombre del producto a cambiar
+    vector<Producto> getProducts(vector<Producto>, std::string); // Inventario, nombre del producto a cambiar
 
     float sellProducts(vector<Producto>); //Regresará el total
+    void vaciarCarrito(vector<Producto>);
 
     //getInv();
 
 
 private:
-    std::string password;
+    std::string uPassword;
     std::string uName const;
     bool admin const; //Constante porque no se puede cambiar, al menos por ahora no.
     float venta;
+    vector<Producto> carrito;
 
 
 
