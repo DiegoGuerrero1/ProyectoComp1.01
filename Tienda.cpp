@@ -20,7 +20,7 @@ void Tienda::settName(string &nombreTienda) {
 
 
 vector<Producto> Tienda::getInv() {
-    return vector<Producto>();
+    return inventarioR;
 }
 
 void Tienda::setInventario(Producto unProducto) {
