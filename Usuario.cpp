@@ -11,21 +11,41 @@
 #include "Producto.h"
 using namespace std;
 
+//
+Usuario::Usuario(std::string nombreUsuario, std::string contraseña, bool admin, char sold) {
+
+    setuName(nombreUsuario);
+    setPassword(contraseña);
+    setAdmin(admin);
+    setSold(sold);
+
+
+}
 
 void Usuario::setuName(string &userName) {
     uName = userName;
 
+
+}
+void Usuario::setPassword(std::string) {
+    cout << "Ingrese contraseña, sin espacios" << endl;
+    cin >> uPassword;
 }
 
-void Usuario::editPassword(string &oldPassword, std::string &newPasword) {
+
+
+void Usuario::editPassword(std::string &oldPassword, std::string &newPasword) {
     if(oldPassword == uPassword){
-        uPassword = newPasword;
+        setPassword(newPasword);
+        cout <<"contraseña cambiada"<<endl;
+    }else {
+        cout << "Contraseña incorrecta" << endl;
     }
 }
 
 void Usuario::editName(string &currentPassword, std::string &newName) {
     if (currentPassword == uPassword){
-        uName = newName;
+        setuName(newName);
     }
 
 }
@@ -83,8 +103,12 @@ float Usuario::sellProducts(vector<Producto> inventarioB, int &busquedaId, const
         }
     }
     cout << "¿Pago recibido? s:si, n:no"<< endl;
-    cin >> vendido;
+    cin >> vendido
     if (vendido =='s'){
+        for (unsigned int i{0} ; i <= size(inventarioB); i++){
+            inventarioB.erase(carrito[i]);
+        }
+
 
     } else{
         cout << "Operación cancelada" <<endl;
@@ -129,6 +153,22 @@ void Usuario::removeProduct(int &pId, vector<Producto> invact) {
     findProductbyId(pId, invact);
     std::erase(invact, productsFoundIndex); //Pasmaos el vector de inventario y elimina el Index del producto encontrado
 }
+
+void Usuario::setAdmin(bool padm) {
+    admin = padm;
+
+}
+
+void Usuario::setSold(char s) {
+    if(s == 's'){
+        sold = true;
+    }else{
+        sold = false;
+    }
+}
+
+
+
 
 
 

@@ -12,7 +12,7 @@
 using namespace std;
 class Tienda{
 public:
-    Tienda(std::string&, Producto);
+    Tienda(std::string&, Producto, vector<Producto> , );
 
     //Métodos  set y get (Omitir en el diseño del menú)
 
