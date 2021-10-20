@@ -1,6 +1,6 @@
 /*
- * Authors: Diego Guerrero, Luis Daiman, Ivan Olvera
- * Contact: diegoguerrero@comunidad.unam.mx, Pongan sus correos porfas jasjas 
+ * Authors: Diego Guerrero
+ * Contact: diegoguerrero@comunidad.unam.mx,
  * Date: 18/10/21
  * INTERFACE.
  */ 
