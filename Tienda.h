@@ -11,19 +11,19 @@
 
 using namespace std;
 class Tienda{
+public:
 
-    Tienda(string &tnombre, Producto firstItem, vector<Producto> invAct, Usuario usuarioDefault);
+    Tienda(string nombreTienda, Producto firstItem, vector<Producto> invAct, Usuario usrAct);
 
-    void settName(std::string&);
+    void settName(std::string &);
     vector<Producto> getInv();
-    void setInventario(const Producto&, vector<Producto>, Usuario);
+    void setInventario(Producto, vector<Producto>, Usuario);
     std::string getName();
 
 
-
 private:
-    std::string nombreTiendaR;
-    vector<Producto> inventarioR;
+    std::string nombreTiendaR{""};
+    vector<Producto> inventarioR{};
 
     //Default vars
     std::string defNombreTienda = "Tienda default";

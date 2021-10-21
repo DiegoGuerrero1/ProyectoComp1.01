@@ -16,12 +16,14 @@ using namespace std;
 //Definición de la clase Producto
 class Producto{
 public:
-    Producto(int, string&, std::string&, float& );  //Creamos constructor default
+    explicit Producto(int=0000, std::string="" , std::string="" , float = 0.0);  //Creamos constructor default
+
     //métodos set() y get()
     void setId(int&);
     void setExpd(std::string&);
     void setpName(std::string&);
     void setPrice(float&);
+
     int getId();
     std::string getExpd();
     std::string getpName();
@@ -29,10 +31,10 @@ public:
 
 
 private:
-    int idR;
-    std::string caducidadR;
-    std::string nombreProductoR;
-    float precioR;
+    int idR{0000};
+    std::string caducidadR{"00/00/00"};
+    std::string nombreProductoR{"None"};
+    float precioR{00.00};
 
 };
 

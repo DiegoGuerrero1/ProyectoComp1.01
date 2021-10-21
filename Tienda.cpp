@@ -9,9 +9,11 @@
 #include <vector>
 using namespace std;
 //Definición de constructor
-Tienda::Tienda(std::string &tnombre = "DefaultStore", Producto firstItem = cocacola, vector<Producto> invAct = {0}, Usuario usrAct) {
-    settName(tnombre);
-    setInventario(firstItem, invAct, usrAct);
+Tienda::Tienda(std::string nombreTienda , Producto firstItem, vector<Producto> invAct, Usuario usrAct) {
+    settName(nombreTienda);
+    setInventario(firstItem, invAct,usrAct);
+
+
 
 }
 
@@ -24,7 +26,7 @@ vector<Producto> Tienda::getInv() {
     return inventarioR;
 }
 
-void Tienda::setInventario(const Producto& unProducto, vector<Producto> inventarioActual, Usuario usuarioActual) {
+void Tienda::setInventario(Producto unProducto, vector<Producto> inventarioActual, Usuario usuarioActual) {
     if (usuarioActual.isAdmin()){
         inventarioActual.push_back(unProducto);
     }

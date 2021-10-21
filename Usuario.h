@@ -26,6 +26,7 @@ public:
     void editName(std::string&, std::stringn&); //Nombre, Contraseña
     void setSold(char);
 
+
     //void setInventario(const Producto&, vector<Producto>); Implementada en Tienda
     void llenarCarrito(vector<Producto>, int& ); // Inventario, nombre del producto a cambiar
     bool isAdmin();
@@ -40,6 +41,7 @@ public:
     void clearFoundProduct();
     void removeProduct(int&, vector<Producto>);
     void makeAdmin(char);
+
 
 
 
@@ -60,7 +62,7 @@ private:
     float cuenta;
     vector<Producto&> productsFound; //
     unsigned long productsFoundIndex;
-    char &vendido;
+    char &carritoVendido{n};
     bool &sold{false};
     char padm;
 

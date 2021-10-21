@@ -15,13 +15,17 @@ using namespace std;
 using namespace std;
 //Declaración de Constructures de las clases
 
-Producto::Producto(int id, string& caducidad, std::string& nombreItem, float &precioItem) {
+
+
+Producto::Producto(int id, std::string nombreItem, std::string caducidad , float precioItem){
     setId(id);
     setExpd(caducidad);
     setpName(nombreItem);
     setPrice(precioItem);
-}
 
+
+
+}
 void Producto::setId(int& itemId) {
     idR = itemId;
 }

@@ -1,3 +1,8 @@
+/*
+ * Authors: Damian Garcia, Diego Guerrero,
+ * Contact: luisdamiangarcia@gmail.com , diegoguerrero@comunidad.unam.mx
+ * Date: 20/10/21
+ */
 #include <iostream>
 #include <string>
 #include <vector>
@@ -17,6 +22,7 @@
 // #include "Grocery.h"
 
 using namespace std;
+
 
 //FUNCIONES MENU ADMIN Y MENU TRAB, TAMBIÉN SE PUEDE PASAR A OTRO CPP PARA HACER MAS FANCY EL MAIN ;D
 int menuadmin(void){

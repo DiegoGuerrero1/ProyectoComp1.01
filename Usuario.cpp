@@ -13,6 +13,11 @@ using namespace std;
 
 //
 Usuario::Usuario(std::string nombreUsuario, std::string contraseña, bool admin, char sold) {
+    setuName(nombreUsuario);
+    setPassword(contraseña);
+    setAdmin(admin);
+    setSold(sold);
+
 
 }
 
@@ -90,15 +95,16 @@ void Usuario::llenarCarrito(vector<Producto>inventario, int &id) {
 }
 
 float Usuario::sellProducts(vector<Producto> inventarioB, int &busquedaId) {
+
     while (true){
-        llenarCarrito(inventarioB, busquedaId, tUser);
+        llenarCarrito(inventarioB, busquedaId);
         if (!agregarMas){
             break;
         }
     }
     cout << "¿Pago recibido? s:si, n:no"<< endl;
-    cin >> vendido;
-    if (vendido =='s'){
+    cin >> carritoVendido;
+    if (carritoVendido == 's'){
         for (unsigned int i{0} ; i <= size(inventarioB); i++){
             inventarioB.erase(carrito[i]);
         }
@@ -198,6 +204,8 @@ bool Usuario::isThePasword(std::string testPassword) {
     }
 
 }
+
+
 
 
 
