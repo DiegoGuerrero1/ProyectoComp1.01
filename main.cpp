@@ -22,8 +22,12 @@
 
 Usuario registrarUsuario();
 
-using namespace std;
+void agregarProducto();
 vector <Usuario> listaUsuarios;
+vector <Producto> inventarioTiendaD;
+using namespace std;
+
+
 
 int main() {
 	//Declaración de variables
@@ -80,11 +84,7 @@ do{
 		    case 1: 
 		    system("cls");
 		    cout << "Agregar producto. \n";
-		    cout << "Ingrese el nombre del producto";
-		   
-		 /*	Producto::setpName();
-		    Producto.nombreProductoR;
-			Product.getpName(); */
+		    agregarProducto();
 			
 			cout << "Presiona 1 para volver al menu anterior: \n"<< endl;
 			cin >> afin;
@@ -170,6 +170,23 @@ return 0;
 
 }
 
+void agregarProducto() {
+    std::string nombre;
+    float precio;
+    string caducidad;
+    int id;
+    cout << "Ingresa el nombre del producto sin espacios:\n" << endl;
+    cin >> precio;
+    cout << "Ingresa su id:\n" << endl;
+    cin >> id;
+    cout <<"Fecha de caducidad: \n";
+    cin >> caducidad;
+    Producto productoNuevo{id,nombre,caducidad,precio};
+    inventarioTiendaD.push_back(productoNuevo);
+    cout << "*Producto creado* \n id: "<<productoNuevo.getId()<< "Nombre:" << productoNuevo.getpName() << "Caducidad: "<< productoNuevo.getExpd() << endl;
+
+}
+
 Usuario registrarUsuario() {
     std::string uname;
     std::string passw;
@@ -177,11 +194,11 @@ Usuario registrarUsuario() {
     Usuario nuevoUsuario;
     cout << "Ingresar nombre sin espacios: \n" << endl;
     cin >>  uname ;
-    cout <<"Crear contraseña: \n" << endl;
+    cout <<"Crear contraseña (sin espacios): \n" << endl;
     cin >> passw;
     cout <<"¿Hacer administrador? s: si, n: no"<< endl;
     cin >> mAdmin;
-    Usuario usuario1{uname};
+    Usuario usuario1{uname, passw, mAdmin, "n"};
     cout << "Usuario creado \n Nombre: " << nuevoUsuario.getUsrName() << "Administrador: " << nuevoUsuario.isAdmin() << endl;
     listaUsuarios.push_back(usuario1);
 
