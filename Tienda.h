@@ -22,9 +22,8 @@ public:
 
 
 private:
-    std::string nombreTiendaR{""};
-    vector<Producto> inventarioR{};
-
+    std::string nombreTienda{""};
+    vector<Producto> inventarioTienda{};
     //Default vars
     std::string defNombreTienda = "Tienda default";
 

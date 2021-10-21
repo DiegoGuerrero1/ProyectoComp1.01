@@ -18,12 +18,12 @@ Tienda::Tienda(std::string nombreTienda , Producto firstItem, vector<Producto> i
 }
 
 void Tienda::settName(string &nombreTienda) {
-    nombreTiendaR = nombreTienda;
+    nombreTienda = nombreTienda;
 }
 
 
 vector<Producto> Tienda::getInv() {
-    return inventarioR;
+    return inventarioTienda;
 }
 
 void Tienda::setInventario(Producto unProducto, vector<Producto> inventarioActual, Usuario usuarioActual) {
@@ -34,5 +34,5 @@ void Tienda::setInventario(Producto unProducto, vector<Producto> inventarioActua
 }
 
 std::string Tienda::getName() {
-    return nombreTiendaR;
+    return nombreTienda;
 }
