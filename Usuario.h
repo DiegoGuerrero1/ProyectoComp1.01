@@ -36,7 +36,7 @@ public:
     void findProductbyId(int& id, vector<Producto>&);
     float sellProducts(vector<Producto>, int&); //Regresará el total
     void vaciarCarrito();
-    void editPrice(int &prodEditarId, Usuario uActual, vector<Producto> invActual);
+    void editPrice(int &prodEditarId, vector<Producto> invActual);
     void setFoundProduct(Producto &product);
     void clearFoundProduct();
     void removeProduct(int&, vector<Producto>);

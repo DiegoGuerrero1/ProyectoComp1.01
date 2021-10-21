@@ -23,6 +23,9 @@
 Usuario registrarUsuario();
 
 void agregarProducto();
+
+void actualizarPrecios();
+
 vector <Usuario> listaUsuarios;
 vector <Producto> inventarioTiendaD;
 using namespace std;
@@ -81,10 +84,12 @@ do{
 	    switch(mode){
             case 0:
                 registrarUsuario();
+                break;
 		    case 1: 
-		    system("cls");
-		    cout << "Agregar producto. \n";
-		    agregarProducto();
+		        system("cls");
+		        cout << "------------------------- AGREGAR PRODUCTO -------------------------\n";
+		        agregarProducto();
+                break;
 			
 			cout << "Presiona 1 para volver al menu anterior: \n"<< endl;
 			cin >> afin;
@@ -93,6 +98,7 @@ do{
 		    case 2:
 		    	system("cls");
 			    cout << "Actualizar precios: \n " << endl; //Y aquí va a estar el modo de agregar, que tomaremos de la clase Tienda
+                actualizarPrecios();
 				cout << "Presiona 1 para volver al menu anterior: \n"<< endl;
 				cin >> afin;
 				break; 
@@ -167,6 +173,11 @@ do{
 }
 while (fin == 1);
 return 0;
+
+}
+
+void actualizarPrecios() {
+    
 
 }
 

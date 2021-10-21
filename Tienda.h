@@ -13,7 +13,8 @@ using namespace std;
 class Tienda{
 public:
 
-    Tienda(string nombreTienda, Producto firstItem, vector<Producto> invAct, Usuario usrAct);
+
+    Tienda(string{""}, Producto, vector<Producto> inventarioTienda, Usuario usuairodef);
 
     void settName(std::string &);
     vector<Producto> getInv();
@@ -22,10 +23,12 @@ public:
 
 
 private:
-    std::string nombreTienda{""};
+    std::string nombreTienda{"Tienda default"};
     vector<Producto> inventarioTienda{};
-    //Default vars
-    std::string defNombreTienda = "Tienda default";
+    Usuario usuairodef;
+    Producto productoVacio;
+
+
 
 };
 

@@ -56,7 +56,7 @@ void Producto::setPrice(float &precio) {
 
 }
 
-float Producto::getPrice() const {
+float Producto::getPrice() {
     return precioR;
 }
 

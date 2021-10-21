@@ -140,12 +140,14 @@ void Usuario::clearFoundProduct() {
     cout << "No se encontró ningún producto."<<endl;
 }
 
-void Usuario::editPrice(int &prodEditarId, Usuario uActual, vector<Producto> invActual) {
-    if (!uActual.isAdmin()){
+void Usuario::editPrice(int &prodEditarId, vector<Producto> invActual) {
+    float nuevoPrecio;
+    if (!isAdmin()){
         cout << "El usuario no es administrador"<< endl;
     }else{
+        cout << "Por el momento sólo se puede reemplazar por id" << endl;
         findProductbyId(prodEditarId, invActual);
-
+        productsFound[0].setPrice(nuevoPrecio);
     }
 
 }

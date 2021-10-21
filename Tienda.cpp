@@ -9,9 +9,9 @@
 #include <vector>
 using namespace std;
 //Definición de constructor
-Tienda::Tienda(std::string nombreTienda , Producto firstItem, vector<Producto> invAct, Usuario usrAct) {
+Tienda::Tienda(std::string nombreTienda , Producto productoVacio, vector<Producto> inventarioTienda, Usuario usuairodef ) {
     settName(nombreTienda);
-    setInventario(firstItem, invAct,usrAct);
+    setInventario(productoVacio,inventarioTienda ,usuairodef);
 
 
 
