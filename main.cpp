@@ -20,14 +20,18 @@
 #include "Usuario.h"
 
 
-void registrarUsuario();
+Usuario registrarUsuario();
 
 using namespace std;
+vector <Usuario> listaUsuarios;
 
 int main() {
 	//Declaración de variables
     int mode, fin, afin, tfin, intento = 0, i = 0;
     string pass;
+    Usuario newUser;
+    Tienda tiendaDefault;
+
     //objeto
     
     
@@ -72,7 +76,7 @@ do{
 	     	
 	    switch(mode){
             case 0:
-                registrarUsuario(newUserName, newUserPassword, newUser);
+                registrarUsuario();
 		    case 1: 
 		    system("cls");
 		    cout << "Agregar producto. \n";
@@ -166,16 +170,21 @@ return 0;
 
 }
 
-Usuario registrarUsuario(std::string uname, bool admin, Usuario usuario) {
+Usuario registrarUsuario() {
+    std::string uname;
+    std::string passw;
+    char mAdmin;
+    Usuario nuevoUsuario;
     cout << "Ingresar nombre sin espacios: \n" << endl;
     cin >>  uname ;
     cout <<"Crear contraseña: \n" << endl;
     cin >> passw;
     cout <<"¿Hacer administrador? s: si, n: no"<< endl;
     cin >> mAdmin;
-    Usuario usuario1{};
-    cout << "Usuario creado \n Nombre: " << usuario.getUsrName() << "Administrador: " << usuario.isAdmin() << endl;
-    return usuario;
+    Usuario usuario1{uname};
+    cout << "Usuario creado \n Nombre: " << nuevoUsuario.getUsrName() << "Administrador: " << nuevoUsuario.isAdmin() << endl;
+    listaUsuarios.push_back(usuario1);
+
 
 }
 
