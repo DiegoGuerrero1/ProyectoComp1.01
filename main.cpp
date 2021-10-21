@@ -28,6 +28,10 @@ void actualizarPrecios();
 
 vector <Usuario> listaUsuarios;
 vector <Producto> inventarioTiendaD;
+Usuario empleadoDefault;
+Usuario administradorDefault;//Administrador y empleado default creados con el contructor default.
+[[maybe_unused]] Producto productoInicial;
+vector<Producto> inventarioInicial;
 using namespace std;
 
 
@@ -39,6 +43,7 @@ int main() {
     Usuario newUser;
     Tienda tiendaDefault;
 
+
     //objeto
     
     
@@ -47,11 +52,8 @@ do{
     system("cls");
     cout << "************ Bienvenido a Grocery  ************\n ¿Que modo deseas utilizar? \n [1] Administrador. \n [2] Trabajador.\n Ingresa el numero: " << endl;
     cin >> mode; cout << "\n";
-    Usuario empleadoDefault;
-    Usuario administradorDefault;//Administrador y empleado default creados con el contructor default.
-    Producto productoInicial;
-    vector<Producto> inventarioInicial;
-    Tienda tiendaDefault{"tiendaDefault", productoInicial, inventarioInicial, administradorDefault};
+
+
 
     administradorDefault.setAdmin(true); //Llamar setAdmin() para que el usuario tenga privilegios de administrador, esto debería estar más econdido TODO Agregar a header e implementar desde ahí.
     //Ahora que lo pienso talvez ese método también deba se privado.
@@ -71,12 +73,7 @@ do{
 		
  		if (administradorDefault.isThePasword(pass)){
  		do {
-            Usuario newUser;
-            std::string newUserName;  //Variables local del usuario nuevo, sólo las vamos a utilizar una vez
-            std::string newUserPassword;
-            char mAdmin;
-            int idProductoBusqueda;
- 			//Lo primero que hace es limpiar la pantalla para mostrar el siguiente menú
+            //Lo primero que hace es limpiar la pantalla para mostrar el siguiente menú
  			system("cls");
  			cout << "Modo Administrador. Acciones disponibles:[0]Registrar Usuario \n[1] Agregar Productos\n[2]Actualizar precios\n[3]Ver inventario\n[4]Venta\n Ingresa la opcion:"<<endl;
 	     	cin >> mode;
@@ -177,7 +174,8 @@ return 0;
 }
 
 void actualizarPrecios() {
-    
+
+
 
 }
 

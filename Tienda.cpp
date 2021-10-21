@@ -9,6 +9,7 @@
 #include <vector>
 using namespace std;
 //Definición de constructor
+explicit Producto(int=0000, std::string="" , std::string="" , float = 0.0);
 Tienda::Tienda(std::string nombreTienda , Producto productoVacio, vector<Producto> inventarioTienda, Usuario usuairodef ) {
     settName(nombreTienda);
     setInventario(productoVacio,inventarioTienda ,usuairodef);

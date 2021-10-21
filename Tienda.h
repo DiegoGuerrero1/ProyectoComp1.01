@@ -14,7 +14,7 @@ class Tienda{
 public:
 
 
-    Tienda(string{""}, Producto, vector<Producto> inventarioTienda, Usuario usuairodef);
+    explicit Tienda(string="");
 
     void settName(std::string &);
     vector<Producto> getInv();
