@@ -82,14 +82,14 @@ void Usuario::findProductbyId(int &id , vector<Producto> &inventarioAc) {
 
 
 
-void Usuario::llenarCarrito(vector<Producto>inventario, int &id, Usuario usrA) {
+void Usuario::llenarCarrito(vector<Producto>inventario, int &id) {
 
-   usrA.findProductbyId(id, inventario);
+   findProductbyId(id, inventario);
    carrito = productsFound;
 
 }
 
-float Usuario::sellProducts(vector<Producto> inventarioB, int &busquedaId, const Usuario& tUser) {
+float Usuario::sellProducts(vector<Producto> inventarioB, int &busquedaId) {
     while (true){
         llenarCarrito(inventarioB, busquedaId, tUser);
         if (!agregarMas){
@@ -97,7 +97,7 @@ float Usuario::sellProducts(vector<Producto> inventarioB, int &busquedaId, const
         }
     }
     cout << "¿Pago recibido? s:si, n:no"<< endl;
-    cin >> vendido
+    cin >> vendido;
     if (vendido =='s'){
         for (unsigned int i{0} ; i <= size(inventarioB); i++){
             inventarioB.erase(carrito[i]);

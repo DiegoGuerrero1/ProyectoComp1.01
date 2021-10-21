@@ -27,13 +27,13 @@ public:
     void setSold(char);
 
     //void setInventario(const Producto&, vector<Producto>); Implementada en Tienda
-    void llenarCarrito(vector<Producto>, int&, Usuario ); // Inventario, nombre del producto a cambiar
+    void llenarCarrito(vector<Producto>, int& ); // Inventario, nombre del producto a cambiar
     bool isAdmin();
     std::string getDefPassword();
     bool isThePasword(std::string); //Dice si es igual o no a la contraseña sin exponerla
     void findProductbyName(std::string&, vector<Producto>&);
     void findProductbyId(int& id, vector<Producto>&);
-    float sellProducts(vector<Producto>, int&, const Usuario&); //Regresará el total
+    float sellProducts(vector<Producto>, int&); //Regresará el total
     void vaciarCarrito();
     void editPrice(int &prodEditarId, Usuario uActual, vector<Producto> invActual);
     void setFoundProduct(Producto &product);
