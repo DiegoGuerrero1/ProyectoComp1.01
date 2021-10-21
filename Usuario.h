@@ -53,18 +53,18 @@ public:
 
 
 private:
-    std::string uPassword{""};
+    std::string uPassword{"parosinohaypresenciales"};
     std::string uName{""};
-    bool admin const; //Constante porque no se puede cambiar, al menos por ahora no.
-    float venta;
+    bool admin{false}; //Constante porque no se puede cambiar, al menos por ahora no.
+    float venta{00.00};
     vector<Producto> carrito;
-    bool agregarMas;
-    float cuenta;
+    bool agregarMas{false};
+    float cuenta{00.00};
     vector<Producto&> productsFound; //
-    unsigned long productsFoundIndex;
+    unsigned long productsFoundIndex{0};
     char &carritoVendido{n};
     bool &sold{false};
-    char padm;
+    char padm{''};
 
     std::string defaultPassword = "parosinohaypresenciales";
 

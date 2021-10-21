@@ -198,7 +198,7 @@ Usuario registrarUsuario() {
     cin >> passw;
     cout <<"¿Hacer administrador? s: si, n: no"<< endl;
     cin >> mAdmin;
-    Usuario usuario1{uname, passw, mAdmin, "n"};
+    Usuario usuario1{uname, passw, nuevoUsuario.makeAdmin(mAdmin),'n'};
     cout << "Usuario creado \n Nombre: " << nuevoUsuario.getUsrName() << "Administrador: " << nuevoUsuario.isAdmin() << endl;
     listaUsuarios.push_back(usuario1);
 
