@@ -16,7 +16,7 @@ using namespace std;
 
 class Usuario{
 public:
-    explicit Usuario(std::string ="parosinohaypresenciales", std::string = "", bool = false, char ='n'); //Constructor default
+    explicit Usuario(std::string =std::string = "","parosinohaypresenciales", bool = false, char ='n'); //Constructor default
     //métodos get y set
     void setuName(std::string&);
     void setPassword(std::string);

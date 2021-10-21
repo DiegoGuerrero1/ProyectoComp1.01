@@ -27,7 +27,7 @@ public:
     int getId();
     std::string getExpd();
     std::string getpName();
-    float getPrice() const;
+    float getPrice(); 
 
 
 private:

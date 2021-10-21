@@ -20,6 +20,8 @@
 #include "Usuario.h"
 
 
+void registrarUsuario();
+
 using namespace std;
 
 int main() {
@@ -31,10 +33,17 @@ int main() {
     
     //Inicio del programa
 do{
-	//Limpia la pantalla cada vez que empieza el ciclo
-	system("cls");
+    system("cls");
     cout << "************ Bienvenido a Grocery  ************\n ¿Que modo deseas utilizar? \n [1] Administrador. \n [2] Trabajador.\n Ingresa el numero: " << endl;
     cin >> mode; cout << "\n";
+    Usuario empleadoDefault;
+    Usuario administradorDefault;//Administrador y empleado default creados con el contructor default.
+    Producto productoInicial;
+    vector<Producto> inventarioInicial;
+    Tienda tiendaDefault{"tiendaDefault", productoInicial, inventarioInicial, administradorDefault};
+
+    administradorDefault.setAdmin(true); //Llamar setAdmin() para que el usuario tenga privilegios de administrador, esto debería estar más econdido TODO Agregar a header e implementar desde ahí.
+    //Ahora que lo pienso talvez ese método también deba se privado.
     switch(mode) {
     
         case 1:
@@ -43,20 +52,27 @@ do{
  			cin >> pass; cout << "\n";
  		
  			//Se tienen 3 oportunidades para ingresar la contraseña correcta 
-		while  (pass != "grocerY" && intento < 2){
+		while  (!administradorDefault.isThePasword(pass) && intento < 2){
 		system("cls");
 		cout << "Clave incorrecta. \n Intente de nuevo: \n Quedan "<< 2 - intento  << " intentos \n" << endl;
 		intento++;
 		cin >> pass; }	
 		
- 		if (pass == "grocerY"){ 
+ 		if (administradorDefault.isThePasword(pass)){
  		do {
+            Usuario newUser;
+            std::string newUserName;  //Variables local del usuario nuevo, sólo las vamos a utilizar una vez
+            std::string newUserPassword;
+            char mAdmin;
+            int idProductoBusqueda;
  			//Lo primero que hace es limpiar la pantalla para mostrar el siguiente menú
  			system("cls");
- 			cout << "Modo Administrador. Acciones disponibles:\n[1] Agregar Productos\n[2]Actualizar precios\n[3]Ver inventario\n[4]Venta\n Ingresa la opcion:"<<endl;
+ 			cout << "Modo Administrador. Acciones disponibles:[0]Registrar Usuario \n[1] Agregar Productos\n[2]Actualizar precios\n[3]Ver inventario\n[4]Venta\n Ingresa la opcion:"<<endl;
 	     	cin >> mode;
 	     	
 	    switch(mode){
+            case 0:
+                registrarUsuario(newUserName, newUserPassword, newUser);
 		    case 1: 
 		    system("cls");
 		    cout << "Agregar producto. \n";
@@ -149,3 +165,20 @@ while (fin == 1);
 return 0;
 
 }
+
+Usuario registrarUsuario(std::string uname, bool admin, Usuario usuario) {
+    cout << "Ingresar nombre sin espacios: \n" << endl;
+    cin >>  uname ;
+    cout <<"Crear contraseña: \n" << endl;
+    cin >> passw;
+    cout <<"¿Hacer administrador? s: si, n: no"<< endl;
+    cin >> mAdmin;
+    Usuario usuario1{};
+    cout << "Usuario creado \n Nombre: " << usuario.getUsrName() << "Administrador: " << usuario.isAdmin() << endl;
+    return usuario;
+
+}
+
+
+
+
