@@ -43,7 +43,7 @@ void Usuario::editPassword(std::string &oldPassword, std::string &newPasword) {
 }
 
 void Usuario::editName(string &currentPassword, std::string &newName) {
-    if (currentPassword == uPassword){
+    if (isThePasword(currentPassword)){
         setuName(newName);
     }
 
@@ -107,6 +107,7 @@ float Usuario::sellProducts(vector<Producto> inventarioB, int &busquedaId) {
     if (carritoVendido == 's'){
         for (unsigned int i{0} ; i <= size(inventarioB); i++){
             inventarioB.erase(carrito[i]);
+
         }
 
 
