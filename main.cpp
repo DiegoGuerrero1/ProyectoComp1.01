@@ -174,7 +174,9 @@ return 0;
 }
 
 void actualizarPrecios() {
+    int id;
 
+    empleadoDefault.editPrice(id,inventarioTiendaD);
 
 
 }

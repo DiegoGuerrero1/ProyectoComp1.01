@@ -9,14 +9,20 @@
 #include <vector>
 using namespace std;
 //Definición de constructor
-explicit Producto(int=0000, std::string="" , std::string="" , float = 0.0);
-Tienda::Tienda(std::string nombreTienda , Producto productoVacio, vector<Producto> inventarioTienda, Usuario usuairodef ) {
+Tienda::Tienda(string &nombreT, Producto &productoInicial, vector<Producto> &invT, Usuario &aUsr)
+: nombreTienda{nombreT},
+  productoVacio{productoInicial},
+  invTienda{invT},
+  actualUsr{aUsr}{
+    cout << "Tienda " << nombreTienda <<" creada" << endl;
+}
+
+
+ /*{  //Ya no tienen caso los métodos set
     settName(nombreTienda);
     setInventario(productoVacio,inventarioTienda ,usuairodef);
+}*/
 
-
-
-}
 
 void Tienda::settName(string &nombreTienda) {
     nombreTienda = nombreTienda;
@@ -37,3 +43,5 @@ void Tienda::setInventario(Producto unProducto, vector<Producto> inventarioActua
 std::string Tienda::getName() {
     return nombreTienda;
 }
+
+

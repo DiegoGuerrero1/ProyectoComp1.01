@@ -16,7 +16,7 @@ using namespace std;
 //Definición de la clase Producto
 class Producto{
 public:
-    explicit Producto(int=0000, std::string="" , std::string="" , float = 0.0);  //Creamos constructor default
+    explicit Producto(int=0000, std::string="None" , std::string="00/00/00" , float = 0.0);  //Creamos constructor default
 
     //métodos set() y get()
     void setId(int&);
@@ -27,7 +27,7 @@ public:
     int getId();
     std::string getExpd();
     std::string getpName();
-    float getPrice(); 
+    float getPrice();
 
 
 private:
