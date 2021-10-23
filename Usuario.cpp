@@ -12,28 +12,25 @@
 using namespace std;
 
 //
-Usuario::Usuario(std::string nombreUsuario, std::string contraseña, bool admin, char sold) {
-    setuName(nombreUsuario);
-    setPassword(contraseña);
-    setAdmin(admin);
-    setSold(sold);
+Usuario::Usuario(string nombreUsuario, string contraseña, bool willAdmin, char carSold)
+:uName{nombreUsuario},uPassword{contraseña},admin{willAdmin},sold{carSold}{
 
+    cout << "Usuario Creado. \nNombre:"<< getUsrName() << "\n Administrador:" << isAdmin() <<endl;
 
 }
 
-void Usuario::setuName(string &userName) {
+void Usuario::setuName(string userName) {
     uName = userName;
 
 
 }
-void Usuario::setPassword(std::string) {
-    cout << "Ingrese contraseña, sin espacios" << endl;
-    cin >> uPassword;
+void Usuario::setPassword(string pass) {
+    uPassword = pass;
 }
 
 
 
-void Usuario::editPassword(std::string &oldPassword, std::string &newPasword) {
+void Usuario::editPassword(string oldPassword, string newPasword) {
     if(oldPassword == uPassword){
         setPassword(newPasword);
         cout <<"contraseña cambiada"<<endl;
@@ -42,17 +39,17 @@ void Usuario::editPassword(std::string &oldPassword, std::string &newPasword) {
     }
 }
 
-void Usuario::editName(string &currentPassword, std::string &newName) {
+void Usuario::editName(string currentPassword, std::string newName) {
     if (isThePasword(currentPassword)){
         setuName(newName);
     }
 
 }
-void Usuario::setFoundProduct(Producto &product) {
+void Usuario::setFoundProduct(Producto product) {
     productsFound[0] = product;
 }
 
-void Usuario::findProductbyName(string &nombre, vector<Producto> &inventario) {
+void Usuario::findProductbyName(string nombre, vector<Producto> inventario) {
     for(unsigned long i{0} ; i >= inventario.size(); i++){
 
         if ( inventario[i].getpName() == nombre){
@@ -67,7 +64,7 @@ void Usuario::findProductbyName(string &nombre, vector<Producto> &inventario) {
     }
 
 }
-void Usuario::findProductbyId(int &id , vector<Producto> &inventarioAc) {
+void Usuario::findProductbyId(int id , vector<Producto> inventarioAc) {
     for(unsigned long i{0} ; i >= inventarioAc.size(); i++){
 
         if ( inventarioAc[i].getId() == id){
@@ -87,17 +84,17 @@ void Usuario::findProductbyId(int &id , vector<Producto> &inventarioAc) {
 
 
 
-void Usuario::llenarCarrito(vector<Producto>inventario, int &id) {
+void Usuario::llenarCarrito(vector<Producto> inventario, int id, vector<Producto> carritoSuper) {
 
    findProductbyId(id, inventario);
    carrito = productsFound;
 
 }
 
-float Usuario::sellProducts(vector<Producto> inventarioB, int &busquedaId) {
+float Usuario::sellProducts(vector<Producto> inventarioB, int busquedaId) {
 
     while (true){
-        llenarCarrito(inventarioB, busquedaId);
+        llenarCarrito(inventarioB, busquedaId, vector<Producto>());
         if (!agregarMas){
             break;
         }
@@ -140,7 +137,7 @@ void Usuario::clearFoundProduct() {
     cout << "No se encontró ningún producto."<<endl;
 }
 
-void Usuario::editPrice(int &prodEditarId, vector<Producto> invActual) {
+void Usuario::editPrice(int prodEditarId, vector<Producto> invActual) {
     float nuevoPrecio;
     if (!isAdmin()){
         cout << "El usuario no es administrador"<< endl;
@@ -152,7 +149,7 @@ void Usuario::editPrice(int &prodEditarId, vector<Producto> invActual) {
 
 }
 
-void Usuario::removeProduct(int &pId, vector<Producto> invact) {
+void Usuario::removeProduct(int pId, vector<Producto> invact) {
     findProductbyId(pId, invact);
     std::erase(invact, productsFoundIndex); //Pasmaos el vector de inventario y elimina el Index del producto encontrado
 }
@@ -199,7 +196,7 @@ std::string Usuario::getDefPassword() {
     return defaultPassword;
 }
 
-bool Usuario::isThePasword(std::string testPassword) {
+bool Usuario::isThePasword(string testPassword) {
     if(uPassword != testPassword){
         return false;
     }else{

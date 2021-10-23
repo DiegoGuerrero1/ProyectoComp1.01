@@ -16,30 +16,30 @@ using namespace std;
 
 class Usuario{
 public:
-    explicit Usuario(std::string="",std::string = "parosinohaypresenciales", bool = false, char ='n'); //Constructor default
+    explicit Usuario(std::string="Default",std::string = "parosinohaypresenciales", bool = false, char ='n'); //Constructor default
     //métodos get y set
-    void setuName(std::string&);
+    void setuName(std::string);
     void setPassword(std::string);
     void setAdmin(bool);
     std::string getUsrName();
-    void editPassword(std::string&, std::string&); //Nueva contraseña, contraseña anterior
-    void editName(std::string&, std::stringn&); //Nombre, Contraseña
+    void editPassword(std::string, std::string); //Nueva contraseña, contraseña anterior
+    void editName(std::string, std::string); //Nombre, Contraseña
     void setSold(char);
 
 
     //void setInventario(const Producto&, vector<Producto>); Implementada en Tienda
-    void llenarCarrito(vector<Producto>, int& ); // Inventario, nombre del producto a cambiar
+    void llenarCarrito(vector<Producto>, int , vector<Producto>); // Inventario, nombre del producto a cambiar
     bool isAdmin();
     std::string getDefPassword();
     bool isThePasword(std::string); //Dice si es igual o no a la contraseña sin exponerla
-    void findProductbyName(std::string&, vector<Producto>&);
-    void findProductbyId(int& id, vector<Producto>&);
-    float sellProducts(vector<Producto>, int&); //Regresará el total
+    void findProductbyName(std::string, vector<Producto>);
+    void findProductbyId(int id, vector<Producto>);
+    float sellProducts(vector<Producto>, int); //Regresará el total
     void vaciarCarrito();
-    void editPrice(int &prodEditarId, vector<Producto> invActual);
-    void setFoundProduct(Producto &product);
+    void editPrice(int, vector<Producto>);
+    void setFoundProduct(Producto);
     void clearFoundProduct();
-    void removeProduct(int&, vector<Producto>);
+    void removeProduct(int, vector<Producto>);
     void makeAdmin(char);
 
 
@@ -49,22 +49,21 @@ public:
     //getInv();
 
 
-    void makeAdmin(char);
 
 
 private:
     std::string uPassword{"parosinohaypresenciales"};
-    std::string uName{""};
+    std::string uName{"Default"};
     bool admin{false}; //Constante porque no se puede cambiar, al menos por ahora no.
     float venta{00.00};
     vector<Producto> carrito;
     bool agregarMas{false};
     float cuenta{00.00};
-    vector<Producto&> productsFound; //
-    unsigned long productsFoundIndex{0};
-    char &carritoVendido{n};
+    vector<Producto&> productsFound; // must be public
+    unsigned long productsFoundIndex{0}; //must be public
+    char &carritoVendido{'n'};
     bool &sold{false};
-    char padm{''};
+    char padm{'n'};
 
     std::string defaultPassword = "parosinohaypresenciales";
 

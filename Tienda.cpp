@@ -9,7 +9,7 @@
 #include <vector>
 using namespace std;
 //Definición de constructor
-Tienda::Tienda(string &nombreT, Producto &productoInicial, vector<Producto> &invT, Usuario &aUsr)
+Tienda::Tienda(string nombreT, Producto productoInicial, vector<Producto> invT, Usuario aUsr)
 : nombreTienda{nombreT},
   productoVacio{productoInicial},
   invTienda{invT},
@@ -24,13 +24,13 @@ Tienda::Tienda(string &nombreT, Producto &productoInicial, vector<Producto> &inv
 }*/
 
 
-void Tienda::settName(string &nombreTienda) {
+void Tienda::settName(string nombreTienda) {
     nombreTienda = nombreTienda;
 }
 
 
 vector<Producto> Tienda::getInv() {
-    return inventarioTienda;
+    return invTienda;
 }
 
 void Tienda::setInventario(Producto unProducto, vector<Producto> inventarioActual, Usuario usuarioActual) {

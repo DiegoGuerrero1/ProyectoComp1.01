@@ -17,24 +17,25 @@ using namespace std;
 
 
 
-Producto::Producto(int id, std::string nombreItem, std::string caducidad , float precioItem){
-    setId(id);
-    setExpd(caducidad);
-    setpName(nombreItem);
-    setPrice(precioItem);
-
-
-
+Producto::Producto(int id, string nombreItem, string caducidad , float precioItem):
+idR{id}, nombreProductoR{nombreItem},caducidadR{caducidad},precioR{precioItem}
+{
+    cout << "Producto creado. \n Id: "<<getId()<<"\nNombre: "<<getpName()<<"\nPrecio:"<<getPrice()<<endl;
+    cout << "Producto creado. \n Id: "<<idR<<"\nNombre: "<<nombreItem<<"\nPrecio:"<<precioItem<<endl;
 }
-void Producto::setId(int& itemId) {
+
+//constructores delegados
+//Producto::Producto(): Producto{0,"None","None",00.00};
+
+void Producto::setId(int itemId) {
     idR = itemId;
 }
 
-void Producto::setExpd(std::string& expd) {
+void Producto::setExpd(string expd) {
     caducidadR = expd;
 
 }
-void Producto::setpName(std::string& itemName){
+void Producto::setpName(string itemName){
     nombreProductoR = itemName;
 
 }
@@ -51,7 +52,7 @@ std::string Producto::getpName() {
     return nombreProductoR;
 }
 
-void Producto::setPrice(float &precio) {
+void Producto::setPrice(float precio) {
     precioR = precio;
 
 }
