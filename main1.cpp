@@ -6,6 +6,7 @@
 #include "Usuario.h"
 #include "Producto.h"*/
 #include "Product.h"
+#include "User.h"
 #include <vector>
 
 using namespace std;
@@ -13,17 +14,19 @@ using namespace std;
 
 void addFirstProduct();
 vector<Product> inventario;
+vector<User> listaUsuarios;
 
 
-void addProduct();
+void createProduct();
+void createUser();
 
 int main() {
-    addProduct();
+    createUser();
 
     return 0;
 }
 
-void addProduct() {
+void createProduct() {
     std::string inName;
     std::string inExpiration;
     int inId;
@@ -43,3 +46,33 @@ void addProduct() {
 
 };
 
+void createUser(){
+    std::string inNameU;
+    std::string inPasswU;
+    std::string inRepeatPass;
+    char admin;
+    cout << "Ingresa el nobre del usuario: \n" <<endl;
+    getline(cin, inNameU);
+    cout << "Crea una contraseña: \n" << endl;
+    cin.ignore();
+    getline(cin, inPasswU);
+    cout << "Repite la contraseña:\n" <<endl;
+    cin.ignore();
+    getline(cin, inRepeatPass);
+
+    if(inPasswU == inRepeatPass){
+        User newUser{inNameU, inPasswU, false};
+       cout << "¿Hacer administrador? s:si, n:no" << endl;
+       cin >> admin;
+       newUser.makeAdmin(admin);
+       listaUsuarios.push_back(newUser);
+
+    }else{
+        cout <<"Las contraseñas no coinciden, cancelando operación";
+    }
+
+
+
+
+
+}

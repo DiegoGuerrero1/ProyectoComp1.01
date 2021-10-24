@@ -55,14 +55,14 @@ private:
     std::string uPassword{"parosinohaypresenciales"};
     std::string uName{"Default"};
     bool admin{false}; //Constante porque no se puede cambiar, al menos por ahora no.
-    float venta{00.00};
+    //float venta{00.00};
     vector<Producto> carrito;
     bool agregarMas{false};
     float cuenta{00.00};
     vector<Producto&> productsFound; // must be public
     unsigned long productsFoundIndex{0}; //must be public
     char &carritoVendido{'n'};
-    bool &sold{false};
+    //bool &sold{false};
     char padm{'n'};
 
     std::string defaultPassword = "parosinohaypresenciales";

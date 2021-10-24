@@ -180,6 +180,7 @@ void Usuario::makeAdmin(char madmin) {
                 break;
             default:
                 cout << "Opción no válida, asignando empleado " << endl;
+                setAdmin(false)
                 break;
 
         }
