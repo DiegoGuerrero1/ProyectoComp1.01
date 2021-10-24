@@ -15,6 +15,8 @@ using namespace std;
 void addFirstProduct();
 vector<Product> inventario;
 vector<User> listaUsuarios;
+User usuarioPrueba{"Default","password", true};
+Product productoPrueba{908, "Agua", "na",10.00};
 
 
 
@@ -24,7 +26,7 @@ void createUser();
 int main() {
     //createUser();
     //createProduct();
-    listaUsuarios[2].sellProducts(inventario);
+    usuarioPrueba.findProductbyId(inventario);
 
     return 0;
 }

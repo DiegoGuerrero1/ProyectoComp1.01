@@ -50,7 +50,7 @@ private:
     bool addItemCart;
     std::vector<Product> foundProducts;
     char moneyReceived;
-    int productoFoundIndex;
+    unsigned int productoFoundIndex;
 
 };
 

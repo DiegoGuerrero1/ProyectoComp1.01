@@ -117,10 +117,10 @@ void User::findProductbyName( vector<Product> inventario) {
     std::string nombre;
     cout << "Ingresa el nombre del producto" << endl;
     getline(cin, nombre);
-    for(unsigned long i{0} ; i >= inventario.size(); i++){
+    for(unsigned long i{0} ; i >= inventario.size() || i < 10000 ; i++){
 
         if ( inventario[i].getpName() == nombre){
-            i = inventario.size();
+            i = 10000;
             setFoundProduct(inventario[i]) ;         //Estaría bueno implementar una búsqueda más optimizada
 
         }else{
@@ -133,53 +133,68 @@ void User::findProductbyName( vector<Product> inventario) {
 }
 
 void User::findProductbyId(vector<Product> inventarioAc) {
-    int id;
+    int ser;
+    std::vector<int>::iterator it;
+    vector<int> searchId;
 
-    while(true){break}
-    for (unsigned long i=0; i >= inventarioAc.size(); i++) {
-        cout << "Ingresar id del producto"<<endl;
-        cin >> id;
-        if (inventarioAc[i].getId() == id) {
-            setFoundProduct(inventarioAc[i]);
-            //Estaría bueno implementar una búsqueda más optimizada
-            i = inventarioAc.size();
-            productoFoundIndex=i;
+    cout << "Ingresar id del producto"<<endl;
+    cin >> ser;
+    // Iterator used to store the position
+    // of searched element
+    // Print Original Vector
+    std::cout << "Inventario original :\n";
+    for(int i=0; i<inventarioAc.size(); i++){
+        std::cout << " " << inventarioAc[i].getpName();
+        //generando un vector de enteros para poder buscar en el con los puros id
+        searchId.push_back(inventarioAc[i].getId());
+    }
+    std::cout << "\n";
+    // Element to be searched
+    // std::find function call
+    it = std::find(searchId.begin(), searchId.end(), ser);
+    if (it != searchId.end())
+    {
+        clearFoundProduct(); //Por si queda alg[un producto ah[i
+        std::cout << "Producto con id " << ser <<" encontrado en la posición: " ;
+        std::cout << it - searchId.begin() << " (countando desde cero) \n" ;
+        foundProducts.push_back(inventarioAc[it - searchId.begin()]);
+    }
+    else {
+        std::cout << "Producto no encontrado.\n\n";
+    }
+
+
+}
+
+
+
+
+    float User::sellProducts(vector<Product> inventarioB) {
+        char agregarMas;
+        char carritoVendido;
+        while (true) {
+            llenarCarrito(inventarioB);
+            cout << "¿Agregar más productos al carrito? s:si, n:no" << endl;
+            cin >> agregarMas;
+            if (agregarMas != 's') {
+                break;
+            }
+        }
+        cout << "¿Pago recibido? s:si, n:no" << endl;
+        cin >> carritoVendido;
+        if (carritoVendido == 's') {
+            for (unsigned int i{0}; i <= size(inventarioB); i++) {
+                removeProductFound(inventarioB);
+
+            }
 
 
         } else {
-            clearFoundProduct();
-            cout << "No se encontró ningún producto."<<endl;
-
+            cout << "Operación cancelada" << endl;
+            vaciarCarrito();
         }
+        return 0;
     }
-}
-
-float User::sellProducts(vector<Product> inventarioB) {
-    char agregarMas;
-    char carritoVendido;
-    while (true){
-        llenarCarrito(inventarioB);
-        cout << "¿Agregar más productos al carrito? s:si, n:no" << endl;
-        cin >> agregarMas;
-        if (agregarMas != 's'){
-            break;
-        }
-    }
-    cout << "¿Pago recibido? s:si, n:no"<< endl;
-    cin >> carritoVendido;
-    if (carritoVendido == 's'){
-        for (unsigned int i{0} ; i <= size(inventarioB); i++){
-            removeProductFound(inventarioB);
-
-        }
-
-
-    } else{
-        cout << "Operación cancelada" <<endl;
-        vaciarCarrito();
-    }
-    return 0;
-}
 
 void User::vaciarCarrito() {
   cart.clear();
@@ -210,7 +225,7 @@ void User::editPrice(vector<Product> inventario) {
 }
 
 void User::setFoundProduct(Product producto) {
-    foundProducts[0] = producto;
+    foundProducts.push_back(producto) ;
 }
 
 void User::clearFoundProduct() {
