@@ -29,12 +29,12 @@ public:
     void editPassword();
     void editName();
     void setSold(char);
-    void llenarCarrito(vector<Product>, int );
+    void llenarCarrito(vector<Product>);
     bool isAdmin();
 
         //Accesibles al usuario final
     void findProductbyName( vector<Product>);
-    void findProductbyId(int id, vector<Product>);
+    void findProductbyId(vector<Product>);
     float sellProducts(vector<Product>, int); //Regresará el total
     void vaciarCarrito();
     void editPrice(vector<Product>);

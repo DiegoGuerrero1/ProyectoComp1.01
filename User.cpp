@@ -99,8 +99,8 @@ void User::setSold(char s) {
     }
 }
 
-void User::llenarCarrito(vector<Product> inventario, int id) {
-    findProductbyId(id, inventario);
+void User::llenarCarrito(vector<Product> inventario) {
+    findProductbyId(inventario);
     cart = foundProducts;
 
 }
@@ -132,9 +132,12 @@ void User::findProductbyName( vector<Product> inventario) {
     }
 }
 
-void User::findProductbyId(int id, vector<Product> inventarioAc) {
-    for (unsigned long i{0}; i >= inventarioAc.size(); i++) {
+void User::findProductbyId(vector<Product> inventarioAc) {
+    int id;
 
+    for (unsigned long i{0}; i >= inventarioAc.size(); i++) {
+        cout << "Ingresar id del producto"<<endl;
+        cin >> id;
         if (inventarioAc[i].getId() == id) {
             setFoundProduct(inventarioAc[i]);
             //Estaría bueno implementar una búsqueda más optimizada
@@ -150,6 +153,25 @@ void User::findProductbyId(int id, vector<Product> inventarioAc) {
 }
 
 float User::sellProducts(vector<Product>, int) {
+    while (true){
+        llenarCarrito(inventarioB, busquedaId, vector<Producto>());
+        if (!agregarMas){
+            break;
+        }
+    }
+    cout << "¿Pago recibido? s:si, n:no"<< endl;
+    cin >> carritoVendido;
+    if (carritoVendido == 's'){
+        for (unsigned int i{0} ; i <= size(inventarioB); i++){
+            inventarioB.erase(carrito[i]);
+
+        }
+
+
+    } else{
+        cout << "Operación cancelada" <<endl;
+        vaciarCarrito();
+    }
     return 0;
 }
 
