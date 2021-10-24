@@ -22,6 +22,7 @@ void createUser();
 
 int main() {
     createUser();
+    createProduct();
 
     return 0;
 }
@@ -32,8 +33,10 @@ void createProduct() {
     int inId;
     float inPrice;
     cout << "Ingresa el nobre del producto: \n" <<endl;
+    cin.ignore();
     getline(cin, inName);
     cout << "Ingresa el id: \n" << endl;
+    cin.ignore();
     cin >>inId;
     cin.ignore();
     cout << "Fecha de caducidad:\n" <<endl;
