@@ -30,9 +30,10 @@ void addProduct() {
     float inPrice;
     cout << "Ingresa el nobre del producto: \n" <<endl;
     getline(cin, inName);
-    cout << "Ingresa el id \n" << endl;
+    cout << "Ingresa el id: \n" << endl;
     cin >>inId;
-    cout << "Fecha de caducidad\n" <<endl;
+    cin.ignore();
+    cout << "Fecha de caducidad:\n" <<endl;
     getline(cin, inExpiration);
     cout << "Precio:\n" << endl;
     cin >> inPrice ;

@@ -11,7 +11,7 @@ using namespace std;
 Product::Product(int pId,string pName, string pExpiration, float pPrice)
 : id{pId},name{pName},expiration{pExpiration}, price{pPrice}{
 
-    cout << "Producto creado. \nId: "<<id<<"\nNombre: "<<name<<"\nPrecio:"<<price<<endl;
+    cout << "Producto creado. \nId: "<<id<<"\nNombre: "<< name << "\nCaducidad: "<< expiration <<"\nPrecio: "<<price<<endl;
     //cout << "Producto creado. \n Id: "<<getId()<<"\nNombre: "<<getpName()<<"\nPrecio:"<<getPrice()<<endl;
 }
 

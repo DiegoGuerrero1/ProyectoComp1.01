@@ -12,7 +12,7 @@ using namespace std;
 class Product {
 public:
     //Constructor
-    explicit Product(int, std::string,std::string, float );
+    explicit Product(int, std::string,std::string, float);
 
     //Methods
     void setId(int);
