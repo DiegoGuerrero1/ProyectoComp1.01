@@ -114,49 +114,57 @@ bool User::isAdmin() {
 }
 
 void User::findProductbyName( vector<Product> inventario) {
-    std::string nombre;
-    cout << "Ingresa el nombre del producto" << endl;
-    getline(cin, nombre);
-    for(unsigned long i{0} ; i >= inventario.size() || i < 10000 ; i++){
+    std::string nameSearch;
+    std::vector<std::string>::iterator it;
+    vector<string> onlyNames;
 
-        if ( inventario[i].getpName() == nombre){
-            i = 10000;
-            setFoundProduct(inventario[i]) ;         //Estaría bueno implementar una búsqueda más optimizada
-
-        }else{
-            clearFoundProduct();
-            cout << "No se encontró ningún producto."<<endl;
-
-        }
-
-    }
-}
-
-void User::findProductbyId(vector<Product> inventarioAc) {
-    int ser;
-    std::vector<int>::iterator it;
-    vector<int> searchId;
-
-    cout << "Ingresar id del producto"<<endl;
-    cin >> ser;
-    // Iterator used to store the position
-    // of searched element
-    // Print Original Vector
+    cout << "Ingresar nombre del producto:\n"<<endl;
+    getline(cin,nameSearch);
     std::cout << "Inventario original :\n";
-    for(int i=0; i<inventarioAc.size(); i++){
-        std::cout << " " << inventarioAc[i].getpName();
+    for(int i=0; i<inventario.size(); i++){
+        std::cout << " " << inventario[i].getpName();
         //generando un vector de enteros para poder buscar en el con los puros id
-        searchId.push_back(inventarioAc[i].getId());
+        onlyNames.push_back(inventario[i].getpName());
     }
     std::cout << "\n";
     // Element to be searched
     // std::find function call
-    it = std::find(searchId.begin(), searchId.end(), ser);
+    it = std::find(onlyNames.begin(), onlyNames.end(), nameSearch);
+    if (it != onlyNames.end())
+    {
+        clearFoundProduct(); //Por si queda alg[un producto ah[i
+        std::cout << "Producto con id " << nameSearch << " encontrado en la posición: " ;
+        std::cout << it - onlyNames.begin() << " (countando desde cero) \n" ;
+        foundProducts.push_back(inventario[it - onlyNames.begin()]);
+    }
+    else {
+        std::cout << "Producto no encontrado.\n\n";
+    }
+
+}
+
+void User::findProductbyId(vector<Product> inventarioAc) { // No se si se podría crear una plantilla aquí, supongo que si.
+    int idSearch;
+    std::vector<int>::iterator it;
+    vector<int> searchId;
+
+    cout << "Ingresar id del producto\n"<<endl;
+    cin>> idSearch;
+    cout << "Inventario original :\n";
+    for(int i=0; i<inventarioAc.size(); i++){
+        cout << " " << inventarioAc[i].getpName();
+        //generando un vector de enteros para poder buscar en el con los puros id
+        searchId.push_back(inventarioAc[i].getId());
+    }
+    cout << "\n";
+    // Element to be searched
+    // std::find function call
+    it = find(searchId.begin(), searchId.end(), idSearch);
     if (it != searchId.end())
     {
         clearFoundProduct(); //Por si queda alg[un producto ah[i
-        std::cout << "Producto con id " << ser <<" encontrado en la posición: " ;
-        std::cout << it - searchId.begin() << " (countando desde cero) \n" ;
+        cout << "Producto con id " << idSearch << " encontrado en la posición: " ;
+        cout << it - searchId.begin() << " (countando desde cero) \n" ;
         foundProducts.push_back(inventarioAc[it - searchId.begin()]);
     }
     else {
