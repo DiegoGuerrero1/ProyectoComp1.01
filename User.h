@@ -21,26 +21,26 @@ public:
     bool isThePasword(std::string);
         //setters and getters
     std::string getUsrName();
-    /*void setuName(std::string);
+    void setuName(std::string);
     void setPassword(std::string);
 
 
         //Miscelaneus
-    void editPassword(std::string, std::string);
-    void editName(std::string, std::string);
+    void editPassword();
+    void editName();
     void setSold(char);
-    void llenarCarrito(vector<Producto>, int , vector<Producto>);
+    void llenarCarrito(vector<Product>, int );
     bool isAdmin();
 
         //Accesibles al usuario final
-    void findProductbyName(std::string, vector<Producto>);
-    void findProductbyId(int id, vector<Producto>);
-    float sellProducts(vector<Producto>, int); //Regresará el total
+    void findProductbyName( vector<Product>);
+    void findProductbyId(int id, vector<Product>);
+    float sellProducts(vector<Product>, int); //Regresará el total
     void vaciarCarrito();
-    void editPrice(int, vector<Producto>);
-    void setFoundProduct(Producto);
+    void editPrice(vector<Product>);
+    void setFoundProduct(Product);
     void clearFoundProduct();
-    void removeProduct(int, vector<Producto>); */
+    //void removeProduct(int, vector<Product>); no pude jeje
 private:
     std::string name;
     std::string password;
