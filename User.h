@@ -35,12 +35,12 @@ public:
         //Accesibles al usuario final
     void findProductbyName( vector<Product>);
     void findProductbyId(vector<Product>);
-    float sellProducts(vector<Product>, int); //Regresará el total
+    float sellProducts(vector<Product>); //Regresará el total
     void vaciarCarrito();
     void editPrice(vector<Product>);
     void setFoundProduct(Product);
     void clearFoundProduct();
-    //void removeProduct(int, vector<Product>); no pude jeje
+    void removeProductFound(vector<Product>);
 private:
     std::string name;
     std::string password;
@@ -50,6 +50,7 @@ private:
     bool addItemCart;
     std::vector<Product> foundProducts;
     char moneyReceived;
+    int productoFoundIndex;
 
 };
 

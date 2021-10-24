@@ -17,12 +17,14 @@ vector<Product> inventario;
 vector<User> listaUsuarios;
 
 
+
 void createProduct();
 void createUser();
 
 int main() {
-    createUser();
-    createProduct();
+    //createUser();
+    //createProduct();
+    listaUsuarios[2].sellProducts(inventario);
 
     return 0;
 }
