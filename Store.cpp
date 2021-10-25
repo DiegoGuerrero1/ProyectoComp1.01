@@ -15,17 +15,19 @@ name{storeName}, initialProduct{firstItem}, inventory{storeInventory}, forsearch
 }
 
 void Store::settName(string newName) {
-
+    name = newName;
 }
 
 vector<Product> Store::getInv() {
-
+    return inventory;
 }
 
-void Store::setInventario(Product, vector<Product>, User) {
-
+void Store::setInventario(Product product, vector<Product> inventory, User creator) {
+    if (creator.isAdmin()){
+        inventory.push_back(product);
+    }
 }
 
 std::string Store::getName() {
-    return std::string();
+    return name;
 }

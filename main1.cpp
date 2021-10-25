@@ -7,6 +7,7 @@
 #include "Producto.h"*/
 #include "Product.h"
 #include "User.h"
+#include "Store.h"
 #include <vector>
 
 using namespace std;
@@ -15,7 +16,7 @@ using namespace std;
 void addFirstProduct();
 vector<Product> inventario;
 vector<User> listaUsuarios;
-User usuarioPrueba{"Default","password", true};
+User usuarioPrueba{"Default User","password", true};
 Product productoPrueba{908, "Agua", "na",10.00};
 
 
@@ -27,10 +28,12 @@ void createUser();
 
 int main() {
     //createUser();
-    createProduct();
-    usuarioPrueba.findProductbyId(inventario); //Por el momento no puedo realizar una búsqueda en el vector
+    //createProduct();
+    //usuarioPrueba.findProductbyId(inventario); //Por el momento no puedo realizar una búsqueda en el vector
+    //usuarioPrueba.findProductbyName(inventario);
 
-    usuarioPrueba.findProductbyName(inventario);
+    Store defaultStore{"Defult", productoPrueba, inventario, usuarioPrueba}; // Si se crea la tienda default. Aquí no se
+    //Si sea conveniente crear un método createStore() ya que sólo ser+ia una tienda. Por el momento sería bueno dejarlo así para que se cree la tienda default
 
     return 0;
 }
