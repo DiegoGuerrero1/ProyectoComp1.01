@@ -15,11 +15,12 @@ using namespace std;
 
 
 void addFirstProduct();
-vector<Product> inventario;
+
 vector<User> listaUsuarios;
 User usuarioPrueba{"Default User","password", true};
 User usuarioActivo = usuarioPrueba;
 Product productoPrueba{908, "Agua", "na",10.00};
+vector<Product> inventario;
 bool firstTime = true;
 bool correctLogin = false;
 
@@ -44,7 +45,7 @@ int main() {
     //       Registrar usuairo nuevo.
     //   Pide pontraseña del usuario default.
 
-   while(firstTime){
+while(firstTime){
        showCeroScreen();
    }
     login();
@@ -77,8 +78,12 @@ int main() {
    //       [3] Editar Usuario
    //           [1] Editar Nombre
    //           [2] Editar contraseña
-
-
+//createProduct();
+//createUser();
+//login();
+//usuarioActivo.editPrice(inventario); //Sirve
+usuarioActivo.sellProducts(inventario); //Sirve
+//usuarioActivo.editUser();
 
     return 0;
 }
@@ -134,10 +139,13 @@ void showCeroScreen() {
 
     cout << "Es la primera vez que usas Grocery, por favor crea un usuario \n";
     createUser();
+    cout << "\nTambién crea un producto\n" << endl;
+    createProduct();
     firstTime = false;
 }
 
 void login() {
+    cout << "********** Iniciar Sesión *********" <<endl;
     std::vector<string>::iterator it;
     vector<string> onlyNames;
     std::string nameUserSearch;
@@ -170,16 +178,19 @@ void login() {
 } //Debería estar dentro de una clase
 
 void createProduct() {
+    cout << "*********** Crear producto ***********" << endl;
     std::string inName;
     std::string inExpiration;
     int inId;
     float inPrice;
     cout << "Ingresa el nobre del producto: \n" <<endl;
+    cin.ignore();
     getline(cin, inName);
     cout << "Ingresa el id: \n" << endl;
-    cin >>inId;
     cin.ignore();
+    cin >>inId;
     cout << "Fecha de caducidad:\n" <<endl;
+    cin.ignore();
     getline(cin, inExpiration);
     cout << "Precio:\n" << endl;
     cin >> inPrice ;
@@ -190,6 +201,7 @@ void createProduct() {
 };
 
 void createUser(){
+    cout << "******** Registrar Usuario **********" << endl;
     std::string inNameU;
     std::string inPasswU;
     std::string inRepeatPass;
@@ -209,6 +221,7 @@ void createUser(){
        cin >> admin;
        newUser.makeAdmin(admin);
        listaUsuarios.push_back(newUser);
+
 
     }else{
         cout <<"Las contraseñas no coinciden, cancelando operación";

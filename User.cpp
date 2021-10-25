@@ -226,6 +226,7 @@ void User::editPrice(vector<Product> inventario) {
         cout << "Ingrese el nuevo precio: \n";
         cin >> nuevoPrecio;
         foundProducts[0].setPrice(nuevoPrecio);
+        cout << "Precio de " << foundProducts[0].getpName() << " cambiado a: "<< foundProducts[0].getPrice() << endl;
     }
 }
 
@@ -249,22 +250,30 @@ void User::editUser() {
     std::string newName;
     std::string newPassword;
     std::string oldPassword;
-    cout << "Ingresa tu contraseña" << endl;
+    cout << "*********** Editar Usuario *********** \n";
+    cout << "Ingresa tu contraseña\n" << endl;
+    cin.ignore();
+    getline(cin, oldPassword);
     if (isThePasword(oldPassword)){
         cout << "¿Qué quieres cambiar? \n [1] Contraseña [2] Nombre de Usuario" << endl;
+        cin >> option;
         switch (option) {
             case 1:
-                cout << "Ingresa la nueva contraseña"<< endl ;
+                cout << "Ingresa la nueva contraseña\n"<< endl ;
+                cin.ignore();
                 getline(cin, newPassword);
                 password = newPassword;
+                cout << "Contraseña cambiada exitosamente" <<endl;
                 break;
             case 2:
-                cout << "Ingresa el nuevo nombre"<< endl ;
+                cout << "Ingresa el nuevo nombre\n"<< endl ;
+                cin.ignore();
                 getline(cin,newName);
                 name = newName;
+                cout << "Nombre cambiado exitosamente a " << name <<endl;
                 break;
             default:
-                cout << "Opción no válida" << endl;
+                cout << "Opción no válida\n" << endl;
                 break;
         }
     } else{
