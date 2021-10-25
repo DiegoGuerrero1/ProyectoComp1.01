@@ -222,21 +222,10 @@ void User::editPrice(vector<Product> inventario) {
     if (!isAdmin()){
         cout << "El usuario no es administrador"<< endl;
     }else{
-        cout << "Por el momento sólo se puede reemplazar buscando por id \n Ingrese id: \n" << endl;
-        cin >> idProducto;
-        for (unsigned long i{0}; i >= inventario.size(); i++) {
-
-            if (inventario[i].getId() == idProducto) {
-                inventario[i].setPrice(nuevoPrecio);
-                //Estaría bueno implementar una búsqueda más optimizada
-                i = inventario.size();
-
-            } else {
-                clearFoundProduct();
-                cout << "No se encontró ningún producto."<<endl;
-
-            }
-        }
+        findProductbyId(inventario);
+        cout << "Ingrese el nuevo precio: \n";
+        cin >> nuevoPrecio;
+        foundProducts[0].setPrice(nuevoPrecio);
     }
 }
 
@@ -254,4 +243,37 @@ void User::removeProductFound(vector<Product> inventario) {
     findProductbyId(inventario);
     inventario[productoFoundIndex] = productoVacio;
     }
+
+void User::editUser() {
+    int option;
+    std::string newName;
+    std::string newPassword;
+    std::string oldPassword;
+    cout << "Ingresa tu contraseña" << endl;
+    if (isThePasword(oldPassword)){
+        cout << "¿Qué quieres cambiar? \n [1] Contraseña [2] Nombre de Usuario" << endl;
+        switch (option) {
+            case 1:
+                cout << "Ingresa la nueva contraseña"<< endl ;
+                getline(cin, newPassword);
+                password = newPassword;
+                break;
+            case 2:
+                cout << "Ingresa el nuevo nombre"<< endl ;
+                getline(cin,newName);
+                name = newName;
+                break;
+            default:
+                cout << "Opción no válida" << endl;
+                break;
+        }
+    } else{
+        cout << "Contraseña incorrecta" <<endl;
+    }
+
+}
+
+void User::addProducts(Product newProduct, vector<Product> inventory) {
+    inventory.push_back(newProduct);
+}
 

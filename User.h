@@ -41,6 +41,11 @@ public:
     void setFoundProduct(Product);
     void clearFoundProduct();
     void removeProductFound(vector<Product>);
+
+    void editUser();
+
+    void addProducts(Product, vector<Product>);
+
 private:
     std::string name;
     std::string password;
