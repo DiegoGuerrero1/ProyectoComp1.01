@@ -163,9 +163,11 @@ void User::findProductbyId(vector<Product> inventarioAc) { // No se si se podrí
     if (it != searchId.end())
     {
         clearFoundProduct(); //Por si queda alg[un producto ah[i
+        productoFoundIndex = it - searchId.begin();
         cout << "Producto con id " << idSearch << " encontrado en la posición: " ;
-        cout << it - searchId.begin() << " (countando desde cero) \n" ;
-        foundProducts.push_back(inventarioAc[it - searchId.begin()]);
+        cout <<productoFoundIndex << " (countando desde cero) \n" ;
+        foundProducts.push_back(inventarioAc[productoFoundIndex]);
+
     }
     else {
         std::cout << "Producto no encontrado.\n\n";
@@ -198,6 +200,23 @@ void User::findProductbyId(vector<Product> inventarioAc) { // No se si se podrí
 
         cout << "¿Pago recibido? s:si, n:no" << endl;
         cin >> carritoVendido;
+        switch (carritoVendido) {
+            case 's':
+                for (unsigned int i{0}; i <= size(inventarioB); i++) {
+                    removeProductFound(inventarioB);
+
+                }
+                break;
+            case 'n':
+                cout << "Operación cancelada" << endl;
+                vaciarCarrito();
+                break;
+            default:
+                cout << "Operación cancelada" << endl;
+                vaciarCarrito();
+                break;
+
+        }
         if (carritoVendido == 's') {
             for (unsigned int i{0}; i <= size(inventarioB); i++) {
                 removeProductFound(inventarioB);
@@ -206,8 +225,7 @@ void User::findProductbyId(vector<Product> inventarioAc) { // No se si se podrí
 
 
         } else {
-            cout << "Operación cancelada" << endl;
-            vaciarCarrito();
+
         }
         return 0;
     }

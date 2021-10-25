@@ -92,7 +92,6 @@ void showAdminMenu() {
 int option;
 cout << "Bienvenido " << usuarioActivo.getUsrName() << ", estas son tus opciones disponibles: \n"<< endl;
     cout << "Modo Administrador.\n[1] Registrar usuario\n[2] Actualizar precios\n[3] Vender productos\n[4] Editar Usuario\n[5] Añadir productos\n Ingresa la opcion: \n";
-    cin.ignore();
     cin >> option;
     switch (option) {
         case 1:
@@ -187,7 +186,6 @@ void createProduct() {
     cin.ignore();
     getline(cin, inName);
     cout << "Ingresa el id: \n" << endl;
-    cin.ignore();
     cin >>inId;
     cout << "Fecha de caducidad:\n" <<endl;
     cin.ignore();
