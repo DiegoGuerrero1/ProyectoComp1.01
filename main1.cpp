@@ -27,14 +27,19 @@ void createProduct();
 void createUser();
 
 int main() {
-    //createUser();
-    //createProduct();
-    //usuarioPrueba.findProductbyId(inventario); //Por el momento no puedo realizar una búsqueda en el vector
-    //usuarioPrueba.findProductbyName(inventario);
+    /*createUser();
 
+    usuarioPrueba.findProductbyId(inventario); //Por el momento no puedo realizar una búsqueda en el vector
+    usuarioPrueba.findProductbyName(inventario);
+    */
     Store defaultStore{"Defult", productoPrueba, inventario, usuarioPrueba}; // Si se crea la tienda default. Aquí no se
     //Si sea conveniente crear un método createStore() ya que sólo ser+ia una tienda. Por el momento sería bueno dejarlo así para que se cree la tienda default
+    //Probando los métodos
 
+    //Crearemos un producto y lo venderemos
+
+    createProduct();
+    usuarioPrueba.sellProducts(inventario); //Necesita un inventario de argumetno
     return 0;
 }
 

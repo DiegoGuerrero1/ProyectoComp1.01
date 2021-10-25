@@ -188,6 +188,14 @@ void User::findProductbyId(vector<Product> inventarioAc) { // No se si se podrí
                 break;
             }
         }
+        for(int i = 0 ; i <= size(cart); i++){
+             sellBill += cart[i].getPrice();
+             cout << i << endl;
+             cout << sellBill << endl;
+
+        }
+        cout << "Cuenta final: " << sellBill <<"$"<<endl;
+
         cout << "¿Pago recibido? s:si, n:no" << endl;
         cin >> carritoVendido;
         if (carritoVendido == 's') {
