@@ -9,6 +9,8 @@
 #include "User.h"
 #include "Store.h"
 #include <vector>
+#include <termios.h>
+#include <unistd.h>
 
 
 using namespace std;
@@ -38,6 +40,8 @@ void login();
 void showEmployeMenu();
 
 void showAdminMenu();
+
+//void echo(bool);
 
 int main() {
     cout << "******************** Bienvenido a Grocery 0.1 ********************"<< endl;
@@ -162,8 +166,8 @@ void login() {
     if (it != onlyNames.end())
     {
         cout << "Ingrsa la contraseña:\n" <<endl;
-        cin.ignore();
-        getline(cin, password);
+        usuarioActivo.inputPassword(password);
+
         if(listaUsuarios[it- onlyNames.begin()].isThePasword(password)){
             usuarioActivo = listaUsuarios[it-onlyNames.begin()];
             correctLogin = true;
@@ -207,11 +211,9 @@ void createUser(){
     cout << "Ingresa el nobre del usuario: \n" <<endl;
     getline(cin, inNameU);
     cout << "Crea una contraseña: \n" << endl;
-    cin.ignore();
-    getline(cin, inPasswU);
+    usuarioActivo.inputPassword(inPasswU);
     cout << "Repite la contraseña:\n" <<endl;
-    cin.ignore();
-    getline(cin, inRepeatPass);
+    usuarioActivo.inputPassword(inRepeatPass);
 
     if(inPasswU == inRepeatPass){
         User newUser{inNameU, inPasswU, false};
@@ -230,3 +232,13 @@ void createUser(){
 
 
 }
+
+/*void echo( bool on = true )
+{
+    struct termios settings;
+    tcgetattr( STDIN_FILENO, &settings );
+    settings.c_lflag = on
+                       ? (settings.c_lflag |   ECHO )
+                       : (settings.c_lflag & ~(ECHO));
+    tcsetattr( STDIN_FILENO, TCSANOW, &settings );
+}*/

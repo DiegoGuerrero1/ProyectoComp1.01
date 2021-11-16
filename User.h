@@ -31,9 +31,11 @@ public:
     void setSold(char);
     void llenarCarrito(vector<Product>);
     bool isAdmin();
+    void echo(bool on);
+    void inputPassword(string &pwrd);
 
         //Accesibles al usuario final
-    void findProductbyName( vector<Product>);
+    void findProductbyName( vector<Product>&);
     void findProductbyId(vector<Product>);
     float sellProducts(vector<Product>); //Regresará el total
     void vaciarCarrito();

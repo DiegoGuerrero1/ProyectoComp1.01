@@ -4,6 +4,8 @@
 
 #include "User.h"
 #include <string>
+#include <termios.h>
+#include <unistd.h>
 
 User::User(string userName, string userPassword, bool makeAdmin)
 :name{userName}, password{userPassword}, admin{makeAdmin} {
@@ -62,13 +64,12 @@ void User::editPassword() {
     std::string oldPassword;
     std::string newPassword;
     cout << "Ingresa la contraseña anterior" << endl;
-    getline(cin, oldPassword);
+    inputPassword(oldPassword);
 
     if(isThePasword(oldPassword)){
         cin.ignore();
         cout << "Ingresa la nueva contraseña" << endl;
-        getline(cin, newPassword);
-        setPassword(newPassword);
+        inputPassword(newPassword);
         cout <<"contraseña cambiada"<<endl;
     }else {
         cout << "Contraseña incorrecta" << endl;
@@ -79,7 +80,7 @@ void User::editName() {
     std::string oldPassword;
     std::string newName;
     cout << "Ingresa la contraseña de la cuenta" << endl;
-    getline(cin, oldPassword);
+    inputPassword(oldPassword);
     if(isThePasword(oldPassword)){
         cin.ignore();
         cout << "Ingresa el nuevo nombre" << endl;
@@ -113,7 +114,7 @@ bool User::isAdmin() {
     };
 }
 
-void User::findProductbyName( vector<Product> inventario) {
+void User::findProductbyName( vector<Product> &inventario) {
     std::string nameSearch;
     std::vector<std::string>::iterator it;
     vector<string> onlyNames;
@@ -270,16 +271,14 @@ void User::editUser() {
     std::string oldPassword;
     cout << "*********** Editar Usuario *********** \n";
     cout << "Ingresa tu contraseña\n" << endl;
-    cin.ignore();
-    getline(cin, oldPassword);
+    inputPassword(oldPassword);
     if (isThePasword(oldPassword)){
         cout << "¿Qué quieres cambiar? \n [1] Contraseña [2] Nombre de Usuario" << endl;
         cin >> option;
         switch (option) {
             case 1:
                 cout << "Ingresa la nueva contraseña\n"<< endl ;
-                cin.ignore();
-                getline(cin, newPassword);
+                inputPassword(newPassword);
                 password = newPassword;
                 cout << "Contraseña cambiada exitosamente" <<endl;
                 break;
@@ -302,5 +301,23 @@ void User::editUser() {
 
 void User::addProducts(Product newProduct, vector<Product> inventory) {
     inventory.push_back(newProduct);
+}
+//La única opción que encontré para tomar una contraseña de input y que no se renderizara en la terminal fue desactivar echo desde el programa
+
+void User::echo(bool on = true) {
+    struct termios settings;
+    tcgetattr( STDIN_FILENO, &settings );
+    settings.c_lflag = on
+                       ? (settings.c_lflag |   ECHO )
+                       : (settings.c_lflag & ~(ECHO));
+    tcsetattr( STDIN_FILENO, TCSANOW, &settings );
+}
+
+void User::inputPassword(string &pwrd ) {
+    echo(false);
+    cin.ignore();
+    getline(cin, pwrd);
+    echo(true);
+
 }
 
