@@ -20,7 +20,7 @@ void Store::settName(string newName) {
 
 vector<Product> Store::getInv() {
     return inventory;
-}
+} // El iterador es un apuntador
 
 void Store::setInventario(Product product, vector<Product> inventory, User creator) {
     if (creator.isAdmin()){

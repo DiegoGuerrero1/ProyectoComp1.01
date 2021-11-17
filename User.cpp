@@ -39,7 +39,7 @@ void User::setAdmin(bool sAdmin) {
 
 }
 
-bool User::isThePasword(string testPassword) {
+bool User::isThePasword(string &testPassword) {
     if(testPassword==password){
         return true;
     }else{
@@ -100,7 +100,7 @@ void User::setSold(char s) {
     }
 }
 
-void User::llenarCarrito(vector<Product> inventario) {
+void User::llenarCarrito(vector<Product> &inventario) {
     findProductbyId(inventario);
     cart = foundProducts;
 
@@ -152,15 +152,17 @@ void User::findProductbyId(vector<Product> inventarioAc) { // No se si se podrí
     cout << "Ingresar id del producto\n"<<endl;
     cin>> idSearch;
     cout << "Inventario original :\n";
-    for(int i=0; i<inventarioAc.size(); i++){
-        cout << " " << inventarioAc[i].getpName();
+    // for loop de rango i -> inventarioAc (inventario actual)
+    for(auto & i : inventarioAc){
+        cout << " " << i.getpName();
         //generando un vector de enteros para poder buscar en el con los puros id
-        searchId.push_back(inventarioAc[i].getId());
+        searchId.push_back(i.getId());
     }
     cout << "\n";
     // Element to be searched
-    // std::find function call
+    // El iterador es un apuntador
     it = find(searchId.begin(), searchId.end(), idSearch);
+
     if (it != searchId.end())
     {
         clearFoundProduct(); //Por si queda alg[un producto ah[i
@@ -179,18 +181,26 @@ void User::findProductbyId(vector<Product> inventarioAc) { // No se si se podrí
 
 
 
-
-    float User::sellProducts(vector<Product> inventarioB) {
+float User::sellProducts(vector<Product> inventarioB) {
         char agregarMas;
         char carritoVendido;
-        while (true) {
+
+    do {
+        llenarCarrito(inventarioB) ;
+        cout << "¿Agregar más productos al carrito? s:si, n:no" << endl;
+        cin >> agregarMas;
+    } while (agregarMas == 's');
+
+
+       /* while (true) {
             llenarCarrito(inventarioB);
             cout << "¿Agregar más productos al carrito? s:si, n:no" << endl;
             cin >> agregarMas;
             if (agregarMas != 's') {
                 break;
             }
-        }
+              }*/
+
         for(int i = 0 ; i <= size(cart); i++){
              sellBill += cart[i].getPrice();
              cout << i << endl;
@@ -236,16 +246,21 @@ void User::vaciarCarrito() {
 }
 
 void User::editPrice(vector<Product> inventario) {
-    int idProducto;
-    float nuevoPrecio;
+    int idProducto, mientras;
+    float nuevoPrecio = 0;
     if (!isAdmin()){
         cout << "El usuario no es administrador"<< endl;
     }else{
+        do {
         findProductbyId(inventario);
+        cout << "Precio actual del producto: " << foundProducts[0].getPrice() << endl;
         cout << "Ingrese el nuevo precio: \n";
         cin >> nuevoPrecio;
         foundProducts[0].setPrice(nuevoPrecio);
         cout << "Precio de " << foundProducts[0].getpName() << " cambiado a: "<< foundProducts[0].getPrice() << endl;
+        cout << "Desea volver al menu anterior? \n [0] para si [1] no" << endl;
+        cin >> mientras;
+    } while (mientras=1);
     }
 }
 
@@ -314,10 +329,10 @@ void User::echo(bool on = true) {
 }
 
 void User::inputPassword(string &pwrd ) {
-    echo(false);
+    //echo(false);
     cin.ignore();
     getline(cin, pwrd);
-    echo(true);
+    //echo(true);
 
 }
 

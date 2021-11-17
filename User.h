@@ -18,7 +18,7 @@ public:
     //Methods
     void makeAdmin(char);
     void setAdmin(bool);
-    bool isThePasword(std::string);
+    bool isThePasword(string &testPassword);
         //setters and getters
     std::string getUsrName();
     void setuName(std::string);
@@ -29,7 +29,7 @@ public:
     void editPassword();
     void editName();
     void setSold(char);
-    void llenarCarrito(vector<Product>);
+    void llenarCarrito(vector<Product> &inventario);
     bool isAdmin();
     void echo(bool on);
     void inputPassword(string &pwrd);

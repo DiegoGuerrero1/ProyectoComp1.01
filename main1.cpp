@@ -12,15 +12,14 @@
 #include <termios.h>
 #include <unistd.h>
 
-
 using namespace std;
 
 
 void addFirstProduct();
 
 vector<User> listaUsuarios;
-User usuarioPrueba{"Default User","password", true};
-User usuarioActivo = usuarioPrueba;
+User adminDefault{"Default User", "compu", true};
+User usuarioActivo = adminDefault;
 Product productoPrueba{908, "Agua", "na",10.00};
 vector<Product> inventario;
 bool firstTime = true;
@@ -82,12 +81,8 @@ while(firstTime){
    //       [3] Editar Usuario
    //           [1] Editar Nombre
    //           [2] Editar contraseña
-//createProduct();
-//createUser();
-//login();
-//usuarioActivo.editPrice(inventario); //Sirve
-usuarioActivo.sellProducts(inventario); //Sirve
-//usuarioActivo.editUser();
+
+usuarioActivo.sellProducts(inventario);
 
     return 0;
 }
@@ -140,11 +135,13 @@ void showEmployeMenu() {
 
 void showCeroScreen() {
 
+    string pass;
     cout << "Es la primera vez que usas Grocery, por favor crea un usuario \n";
     createUser();
-    cout << "\nTambién crea un producto\n" << endl;
+    cout << "También crea un producto para empezar el inventario \n" << endl;
     createProduct();
     firstTime = false;
+
 }
 
 void login() {
@@ -157,8 +154,6 @@ void login() {
     cin.ignore();
     getline(cin, nameUserSearch);
 
-
-
     for(int i = 0; i < listaUsuarios.size(); i++){
         onlyNames.push_back(listaUsuarios[i].getUsrName());
     }
@@ -169,13 +164,13 @@ void login() {
         usuarioActivo.inputPassword(password);
 
         if(listaUsuarios[it- onlyNames.begin()].isThePasword(password)){
-            usuarioActivo = listaUsuarios[it-onlyNames.begin()];
+            usuarioActivo = listaUsuarios[it-onlyNames.begin()]; // Asignamos que el usuario encontrado ahora es el usuario activo
             correctLogin = true;
        }
 
     }
     else {
-        std::cout << "Usuario no encontrado.\n\n";
+        std::cout << "Usuario no encontrado.\n";
 
     }
 } //Debería estar dentro de una clase
@@ -197,7 +192,7 @@ void createProduct() {
     cout << "Precio:\n" << endl;
     cin >> inPrice ;
     Product product{inId,inName,inExpiration,inPrice};
-    inventario.push_back(product);
+    inventario.push_back(product); //Se agrega al inventario
 
 
 };
