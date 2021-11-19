@@ -13,6 +13,7 @@ class User {
 public:
     //constructor
     User(std::string, std::string, bool);
+    ~User();
 
 
     //Methods
@@ -29,20 +30,15 @@ public:
     void editPassword();
     void editName();
     void setSold(char);
-    void llenarCarrito(vector<Product> &inventario);
+    void addtoCart(vector<Product> &inventario);
     bool isAdmin();
     void echo(bool on);
     void inputPassword(string &pwrd);
 
-        //Accesibles al usuario final
-    void findProductbyName( vector<Product>&);
-    void findProductbyId(vector<Product>);
-    float sellProducts(vector<Product>); //Regresará el total
+    static Product & findProductbyId(vector<Product> &inventario);
+    void sellProducts(vector<Product> &inventario); //Regresará el total
     void vaciarCarrito();
-    void editPrice(vector<Product>);
-    void setFoundProduct(Product);
-    void clearFoundProduct();
-    void removeProductFound(vector<Product>);
+    void editPrice(vector<Product> &inventario);
 
     void editUser();
 
@@ -52,12 +48,14 @@ private:
     std::string name;
     std::string password;
     bool admin;
-    float sellBill;
-    std::vector<Product> cart;
+    Product* foundItemPTR;
+    std::vector<Product*> cart; // Un vector de apuntadores de el objeto producto
+                                // Esto con la finalidad de poder eliminarlos desde el carrito si se venden
+                                // En el caso de que no se vendan simplemente se eliminaría el apuntador del carrito mas no el objeto del inventario
     bool addItemCart;
-    std::vector<Product> foundProducts;
+
     char moneyReceived;
-    unsigned int productoFoundIndex;
+
 
 };
 

@@ -17,13 +17,15 @@ using namespace std;
 
 void addFirstProduct();
 
-vector<User> listaUsuarios;
+
 User adminDefault{"Default User", "compu", true};
 User usuarioActivo = adminDefault;
+vector<User> listaUsuarios{adminDefault};
 Product productoPrueba{908, "Agua", "na",10.00};
 vector<Product> inventario;
 bool firstTime = true;
 bool correctLogin = false;
+
 
 
 
@@ -47,10 +49,10 @@ int main() {
    // Pantalla 0. No se ha usado el programa anteriormente.
     //       Registrar usuairo nuevo.
     //   Pide pontraseña del usuario default.
-
 while(firstTime){
-       showCeroScreen();
-   }
+        showCeroScreen();
+}
+//Iniciamos sesión
     login();
     if (correctLogin){
         if (!usuarioActivo.isAdmin()) {
@@ -59,30 +61,10 @@ while(firstTime){
             showAdminMenu();
         }
     } else {
-        login();
+       cout << "No se inició sesión correctamente" << endl;
     }
 
-
-
-
-    //Pantalla 1. Ya se ingresó y se creó un usuairo
-   //   Iniciar sesión
-
-
-   //Pantalla 2. Se inició sesión
-   //   Pantalla 2.1 Es admin
-   //       [1] Registrar Usuario
-   //       [2] Editar Precios
-   //       [3] Vender Productos
-   //       [4] Editar usuario
-   //   Pantalla 2.2 No es admin
-   //       [1] Vender Productos
-   //       [2] Ver inventario
-   //       [3] Editar Usuario
-   //           [1] Editar Nombre
-   //           [2] Editar contraseña
-
-usuarioActivo.sellProducts(inventario);
+    usuarioActivo.sellProducts(inventario);
 
     return 0;
 }
@@ -136,11 +118,21 @@ void showEmployeMenu() {
 void showCeroScreen() {
 
     string pass;
-    cout << "Es la primera vez que usas Grocery, por favor crea un usuario \n";
-    createUser();
-    cout << "También crea un producto para empezar el inventario \n" << endl;
-    createProduct();
-    firstTime = false;
+    cout << "Es la primera vez que usas Grocery, por favor ingresa la constraseña del administrador default \n";
+    //cin.ignore();
+    cin >> pass;
+    if(adminDefault.isThePasword(pass)){
+        createUser();
+        cout << "Ahora crea un producto para empezar el inventario \n" << endl;
+        createProduct();
+        firstTime = false;
+
+    }else{
+        cout << "Contraseña incorrecta" << endl;
+
+    }
+
+
 
 }
 
@@ -154,10 +146,10 @@ void login() {
     cin.ignore();
     getline(cin, nameUserSearch);
 
-    for(int i = 0; i < listaUsuarios.size(); i++){
-        onlyNames.push_back(listaUsuarios[i].getUsrName());
+    for(auto & listaUsuario : listaUsuarios){
+        onlyNames.push_back(listaUsuario.getUsrName());
     }
-    it = std::find(onlyNames.begin(), onlyNames.end(), nameUserSearch);
+    it = find(onlyNames.begin(), onlyNames.end(), nameUserSearch);
     if (it != onlyNames.end())
     {
         cout << "Ingrsa la contraseña:\n" <<endl;
@@ -193,7 +185,8 @@ void createProduct() {
     cin >> inPrice ;
     Product product{inId,inName,inExpiration,inPrice};
     inventario.push_back(product); //Se agrega al inventario
-
+// NOTA: al finalizar este método dice que se eliminó el objeto, esto es verdad, pero pasamos una copia al vector de lista de usuarios.
+// Por lo tanto se creó, se copió a la lista y se eliminó el original
 
 };
 
@@ -204,6 +197,7 @@ void createUser(){
     std::string inRepeatPass;
     char admin;
     cout << "Ingresa el nobre del usuario: \n" <<endl;
+    cin.ignore();
     getline(cin, inNameU);
     cout << "Crea una contraseña: \n" << endl;
     usuarioActivo.inputPassword(inPasswU);
@@ -228,12 +222,3 @@ void createUser(){
 
 }
 
-/*void echo( bool on = true )
-{
-    struct termios settings;
-    tcgetattr( STDIN_FILENO, &settings );
-    settings.c_lflag = on
-                       ? (settings.c_lflag |   ECHO )
-                       : (settings.c_lflag & ~(ECHO));
-    tcsetattr( STDIN_FILENO, TCSANOW, &settings );
-}*/

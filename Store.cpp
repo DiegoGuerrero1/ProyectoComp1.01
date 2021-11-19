@@ -31,3 +31,8 @@ void Store::setInventario(Product product, vector<Product> inventory, User creat
 std::string Store::getName() {
     return name;
 }
+
+Store::~Store() {
+    cout << "tienda "<< getName() <<" eliminada" << endl;
+
+}

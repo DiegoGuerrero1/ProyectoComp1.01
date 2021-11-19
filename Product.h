@@ -13,6 +13,14 @@ class Product {
 public:
     //Constructor
     explicit Product(int, std::string,std::string, float);
+    ~Product();
+    explicit Product(){
+        setPrice(0);
+        setpName("null");
+        setId(0);
+        setExpd("null");
+    }
+
 
     //Methods
     void setId(int);
@@ -27,10 +35,10 @@ public:
 
 private:
     //Member variables
-    int id;
+    int id{};
     std::string name;
     std::string expiration;
-    float price;
+    float price{};
 
 };
 

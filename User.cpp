@@ -100,9 +100,8 @@ void User::setSold(char s) {
     }
 }
 
-void User::llenarCarrito(vector<Product> &inventario) {
-    findProductbyId(inventario);
-    cart = foundProducts;
+void User::addtoCart(vector<Product> &inventario) {
+        cart.push_back(&findProductbyId(inventario)); //Agregamos por referencia los productos por medio de un pushback
 
 }
 
@@ -114,46 +113,17 @@ bool User::isAdmin() {
     };
 }
 
-void User::findProductbyName( vector<Product> &inventario) {
-    std::string nameSearch;
-    std::vector<std::string>::iterator it;
-    vector<string> onlyNames;
-
-    cout << "Ingresar nombre del producto:\n"<<endl;
-    getline(cin,nameSearch);
-    std::cout << "Inventario original :\n";
-    for(int i=0; i<inventario.size(); i++){
-        std::cout << " " << inventario[i].getpName();
-        //generando un vector de enteros para poder buscar en el con los puros id
-        onlyNames.push_back(inventario[i].getpName());
-    }
-    std::cout << "\n";
-    // Element to be searched
-    // std::find function call
-    it = std::find(onlyNames.begin(), onlyNames.end(), nameSearch);
-    if (it != onlyNames.end())
-    {
-        clearFoundProduct(); //Por si queda alg[un producto ah[i
-        std::cout << "Producto con id " << nameSearch << " encontrado en la posición: " ;
-        std::cout << it - onlyNames.begin() << " (countando desde cero) \n" ;
-        foundProducts.push_back(inventario[it - onlyNames.begin()]);
-    }
-    else {
-        std::cout << "Producto no encontrado.\n\n";
-    }
-
-}
-
-void User::findProductbyId(vector<Product> inventarioAc) { // No se si se podría crear una plantilla aquí, supongo que si.
+Product & User::findProductbyId(vector<Product> &inventario) { // No se si se podría crear una plantilla aquí, supongo que si.
     int idSearch;
     std::vector<int>::iterator it;
     vector<int> searchId;
+    unsigned int productoFoundIndex;
 
-    cout << "Ingresar id del producto\n"<<endl;
-    cin>> idSearch;
+    cout << "Ingresar id del producto\n" << endl;
+    cin >> idSearch;
     cout << "Inventario original :\n";
     // for loop de rango i -> inventarioAc (inventario actual)
-    for(auto & i : inventarioAc){
+    for (auto &i: inventario) {
         cout << " " << i.getpName();
         //generando un vector de enteros para poder buscar en el con los puros id
         searchId.push_back(i.getId());
@@ -163,121 +133,80 @@ void User::findProductbyId(vector<Product> inventarioAc) { // No se si se podrí
     // El iterador es un apuntador
     it = find(searchId.begin(), searchId.end(), idSearch);
 
-    if (it != searchId.end())
-    {
-        clearFoundProduct(); //Por si queda alg[un producto ah[i
+    if (it != searchId.end()) {
         productoFoundIndex = it - searchId.begin();
-        cout << "Producto con id " << idSearch << " encontrado en la posición: " ;
-        cout <<productoFoundIndex << " (countando desde cero) \n" ;
-        foundProducts.push_back(inventarioAc[productoFoundIndex]);
+        cout << "Producto con id " << idSearch << " encontrado en la posición: " << endl;
+        cout << productoFoundIndex << " (countando desde cero) \n" << endl;
+        return inventario[productoFoundIndex];
 
-    }
-    else {
+    } else {
         std::cout << "Producto no encontrado.\n\n";
-    }
+        return inventario[productoFoundIndex];
 
+    }
 
 }
 
 
 
-float User::sellProducts(vector<Product> inventarioB) {
+void User::vaciarCarrito() {
+    cart.clear();
+}
+
+void User::sellProducts(vector<Product> &inventario) {
         char agregarMas;
         char carritoVendido;
+        float sellBill = 0;
 
     do {
-        llenarCarrito(inventarioB) ;
-        cout << "¿Agregar más productos al carrito? s:si, n:no" << endl;
+        addtoCart(inventario) ;
+        cout << "¿Agregar más productos al carrito? s:si, n:no" << endl;  //Agrega al carrito mientras el usuario quiera agragar más
         cin >> agregarMas;
     } while (agregarMas == 's');
 
 
-       /* while (true) {
-            llenarCarrito(inventarioB);
-            cout << "¿Agregar más productos al carrito? s:si, n:no" << endl;
-            cin >> agregarMas;
-            if (agregarMas != 's') {
-                break;
-            }
-              }*/
-
-        for(int i = 0 ; i <= size(cart); i++){
-             sellBill += cart[i].getPrice();
+        for(unsigned int i = 0 ; i <= cart.size(); i++){ //Para sacar la cuenta se usa un ciclo for que va sacando y sumando los precios de los productos del carrito
+             sellBill += cart[i]->getPrice(); //Usamos la flecha ya que es un apuntador
              cout << i << endl;
              cout << sellBill << endl;
 
         }
-        cout << "Cuenta final: " << sellBill <<"$"<<endl;
+    cout << "Cuenta final: " << sellBill <<"$"<<endl;
 
-        cout << "¿Pago recibido? s:si, n:no" << endl;
-        cin >> carritoVendido;
-        switch (carritoVendido) {
-            case 's':
-                for (unsigned int i{0}; i <= size(inventarioB); i++) {
-                    removeProductFound(inventarioB);
-
-                }
-                break;
-            case 'n':
-                cout << "Operación cancelada" << endl;
-                vaciarCarrito();
-                break;
-            default:
-                cout << "Operación cancelada" << endl;
-                vaciarCarrito();
-                break;
+    cout << "¿Pago recibido? s:si, otra tecla:no" << endl;
+    cin >> carritoVendido;
+    if (carritoVendido == 's'){
+        for (unsigned int i = 0; i <= cart.size(); i++) {
+            delete cart[i]; // Como se vendieron los productos, se eliminan del inventario original por medio de su apuntador
 
         }
-        if (carritoVendido == 's') {
-            for (unsigned int i{0}; i <= size(inventarioB); i++) {
-                removeProductFound(inventarioB);
-
-            }
-
-
-        } else {
-
-        }
-        return 0;
+    }else{
+        cout << "Operación cancelada" << endl;
+        vaciarCarrito();
     }
-
-void User::vaciarCarrito() {
-  cart.clear();
 }
 
-void User::editPrice(vector<Product> inventario) {
+
+void User::editPrice(vector<Product> &inventario) {
     int idProducto, mientras;
     float nuevoPrecio = 0;
+    Product* sellItemPTR; // Importante: tiene que ser un apuntador. Si no lo es, no se puede realizar esta operación.
+// No se puede devolver por valor ni por copia. Traté de crear otros vectores, sin embargo, tengo sospechas de que esop es la raíz de los bugs.
     if (!isAdmin()){
         cout << "El usuario no es administrador"<< endl;
     }else{
         do {
-        findProductbyId(inventario);
-        cout << "Precio actual del producto: " << foundProducts[0].getPrice() << endl;
-        cout << "Ingrese el nuevo precio: \n";
-        cin >> nuevoPrecio;
-        foundProducts[0].setPrice(nuevoPrecio);
-        cout << "Precio de " << foundProducts[0].getpName() << " cambiado a: "<< foundProducts[0].getPrice() << endl;
-        cout << "Desea volver al menu anterior? \n [0] para si [1] no" << endl;
-        cin >> mientras;
+            sellItemPTR = &findProductbyId(inventario);
+            cout << "Precio actual del producto: " << sellItemPTR->getPrice() << endl;
+            cout << "Ingrese el nuevo precio: \n";
+            cin >> nuevoPrecio;
+            sellItemPTR->setPrice(nuevoPrecio);
+            cout << "Precio de " << sellItemPTR->getpName() << " cambiado a: "<< sellItemPTR->getPrice() << endl;
+            cout << "Desea volver al menu anterior? \n [0] para si [1] no" << endl;
+            cin >> mientras;
     } while (mientras=1);
     }
 }
-
-void User::setFoundProduct(Product producto) {
-    foundProducts.push_back(producto) ;
-}
-
-void User::clearFoundProduct() {
-    foundProducts.clear();
-
-}
-
-void User::removeProductFound(vector<Product> inventario) {
-    Product productoVacio{0,"none","00/00/00", 0};
-    findProductbyId(inventario);
-    inventario[productoFoundIndex] = productoVacio;
-    }
 
 void User::editUser() {
     int option;
@@ -335,4 +264,10 @@ void User::inputPassword(string &pwrd ) {
     //echo(true);
 
 }
+
+User::~User() {
+cout << "Usuario" << getUsrName() << "eliminado" << endl;
+
+}
+
 

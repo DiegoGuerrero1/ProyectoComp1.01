@@ -13,6 +13,7 @@
 class Store {
 public:
     explicit Store(std::string, Product, std::vector<Product>, User);
+    ~Store();
 //Methods
     void settName(std::string);
     vector<Product> getInv();

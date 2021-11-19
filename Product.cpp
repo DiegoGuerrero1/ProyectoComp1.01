@@ -48,3 +48,7 @@ float Product::getPrice() {
 void Product::setId(int) {
 
 }
+
+Product::~Product() {
+cout << "Producto " << getpName() <<" con id: "<< getId() << " eliminado del inventario" << endl;
+}
