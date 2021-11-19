@@ -50,5 +50,5 @@ void Product::setId(int) {
 }
 
 Product::~Product() {
-cout << "Producto " << getpName() <<" con id: "<< getId() << " eliminado del inventario" << endl;
+cout << "Producto " << getpName() <<" con id: "<< getId() << " eliminado" << endl;
 }

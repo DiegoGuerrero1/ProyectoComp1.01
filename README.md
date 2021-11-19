@@ -5,6 +5,8 @@ Repositorio donde se aloja el código fuente de la primera entrega del proyecto 
 1. Diego Guerrero
 2. Damian Vega
 3. Ivan Olvera
+
+_Todos los commits se realizaron al máster, no al main__
 ## Menu 1.0
 0. Pantalla 0. No se ha usado el programa anteriormente.
    Pide pontraseña del usuario default.
