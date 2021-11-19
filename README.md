@@ -8,7 +8,7 @@ Repositorio donde se aloja el código fuente de la primera entrega del proyecto 
 
 _Todos los commits se realizaron al máster, no al main__
 ## Menu 1.0
-0. Pantalla 0. No se ha usado el programa anteriormente.
+0. Pantalla . No se ha usado el programa anteriormente.
    Pide pontraseña del usuario default.
        Registrar usuairo nuevo.
         

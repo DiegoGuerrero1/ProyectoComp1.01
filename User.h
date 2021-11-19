@@ -25,11 +25,12 @@ public:
     std::string getUsrName();
     void setuName(std::string);
     void setPassword(std::string);
+    int getch();
+    string getpass(const char*, bool );
+
 
 
         //Miscelaneus
-    void editPassword();
-    void editName();
 
     void addtoCart(vector<Product> &inventario,vector<Product*> &cart);
     bool isAdmin();

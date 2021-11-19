@@ -8,6 +8,7 @@
 #include <vector>
 
 
+
 using namespace std;
 
 
@@ -132,9 +133,10 @@ void showEmployeMenu() {
 void showCeroScreen() {
 
     string pass;
-    cout << "Es la primera vez que usas Grocery, por favor ingresa la constraseña del administrador default \n";
-    //cin.ignore();
-    cin >> pass;
+
+    pass = usuarioActivoPTR->getpass("Es la primera vez que usas Grocery, por favor ingresa la constraseña del administrador default",
+                                     true);
+
     if(adminDefault.isThePasword(pass)){
         createUser();
         cout << "Ahora crea un producto para empezar el inventario \n" << endl;
@@ -166,7 +168,7 @@ void login() {
     it = find(onlyNames.begin(), onlyNames.end(), nameUserSearch);
     if (it != onlyNames.end())
     {
-        cout << "Ingrsa la contraseña:\n" <<endl;
+        cout << "Ingresa la contraseña:\n" <<endl;
         usuarioActivoPTR->inputPassword(password);
 
         if(listaUsuarios[it- onlyNames.begin()].isThePasword(password)){

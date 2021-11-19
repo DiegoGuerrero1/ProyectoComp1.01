@@ -5,7 +5,10 @@
 #include "User.h"
 #include <string>
 #include <termios.h>
+#include <stdio.h>
 #include <unistd.h>
+#include <iostream>
+
 
 User::User(string userName, string userPassword, bool makeAdmin)
 :name{userName}, password{userPassword}, admin{makeAdmin} {
@@ -25,8 +28,6 @@ void User::makeAdmin(char madmin) {
         case 'n':
             setAdmin(false);
             cout << "El usuario " << getUsrName() <<" es empleado" <<endl;
-            break;
-        case 'c':
             break;
         default:
             cout << "Opción no válida, asignando empleado " << endl;
@@ -61,38 +62,6 @@ void User::setuName(string userName) {
 
 void User::setPassword(string nPassword) {
     password = nPassword;
-}
-
-void User::editPassword() {
-    std::string oldPassword;
-    std::string newPassword;
-    cout << "Ingresa la contraseña anterior" << endl;
-    inputPassword(oldPassword);
-
-    if(isThePasword(oldPassword)){
-        cin.ignore();
-        cout << "Ingresa la nueva contraseña" << endl;
-        inputPassword(newPassword);
-        cout <<"contraseña cambiada"<<endl;
-    }else {
-        cout << "Contraseña incorrecta" << endl;
-    }
-}
-
-void User::editName() {
-    std::string oldPassword;
-    std::string newName;
-    cout << "Ingresa la contraseña de la cuenta" << endl;
-    inputPassword(oldPassword);
-    if(isThePasword(oldPassword)){
-        cin.ignore();
-        cout << "Ingresa el nuevo nombre" << endl;
-        getline(cin, newName);
-        setuName(newName);
-        cout <<"Nombre cambiado"<<endl;
-    }else {
-        cout << "Contraseña incorrecta" << endl;
-    }
 }
 
 void User::addtoCart(vector<Product> &inventario, vector<Product*> &cart ) {
@@ -155,22 +124,26 @@ void User::sellProducts(vector<Product> &inventario, vector<Product*> &cart) {
 
     do {
         addtoCart(inventario, cart) ;
-        cout << "¿Agregar más productos al carrito? s:si, n:no" << endl;  //Agrega al carrito mientras el usuario quiera agragar más
+        cout << "¿Agregar más productos al carrito?[y/n]" << endl;  //Agrega al carrito mientras el usuario quiera agragar más
         cin >> agregarMas;
-    } while (agregarMas == 's');
 
+    } while (agregarMas == 'y');
 
-        for(unsigned int i = 0 ; i <= cart.size(); i++){ //Para sacar la cuenta se usa un ciclo for que va sacando y sumando los precios de los productos del carrito
+        for(auto & cart : cart){
+            sellBill += cart->getPrice();
+
+        }
+        /*for( int i = 0 ; i <= cart.size(); i++){ //Para sacar la cuenta se usa un ciclo for que va sacando y sumando los precios de los productos del carrito
              sellBill += cart[i]->getPrice(); //Usamos la flecha ya que es un apuntador
              cout << i << endl;
              cout << sellBill << endl;
 
-        }
+        }*/
     cout << "Cuenta final: " << sellBill <<"$"<<endl;
 
-    cout << "¿Pago recibido? s:si, otra tecla:no" << endl;
+    cout << "¿Pago recibido? [y/n]:" << endl;
     cin >> carritoVendido;
-    if (carritoVendido == 's'){
+    if (carritoVendido == 'y'){
         for (unsigned int i = 0; i <= cart.size(); i++) {
             delete cart[i]; // Como se vendieron los productos, se eliminan del inventario original por medio de su apuntador
 
@@ -277,4 +250,54 @@ cout << "Usuario " << getUsrName() << " eliminado" << endl;
 
 }
 
+// Tratando de hacer la contraseña invisible
+int User:: getch() {
+    int ch;
+    struct termios t_old, t_new;
 
+    tcgetattr(STDIN_FILENO, &t_old);
+    t_new = t_old;
+    t_new.c_lflag &= ~(ICANON | ECHO);
+    tcsetattr(STDIN_FILENO, TCSANOW, &t_new);
+
+    ch = getchar();
+
+    tcsetattr(STDIN_FILENO, TCSANOW, &t_old);
+    return ch;
+}
+
+
+
+
+
+string User::getpass(const char *prompt, bool show_asterisk=true)
+{
+    const char BACKSPACE=127;
+    const char RETURN=10;
+
+    string password;
+    unsigned char ch=0;
+
+    cout <<prompt<<endl;
+
+    while((ch=getch())!=RETURN)
+    {
+        if(ch==BACKSPACE)
+        {
+            if(password.length()!=0)
+            {
+                if(show_asterisk)
+                    cout <<"\b \b";
+                password.resize(password.length()-1);
+            }
+        }
+        else
+        {
+            password+=ch;
+            if(show_asterisk)
+                cout <<'*';
+        }
+    }
+    cout <<endl;
+    return password;
+}
