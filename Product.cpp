@@ -23,16 +23,16 @@ void Product::setpName(string itemName){
     name = itemName;
 
 }
-int Product::getId() {
+int Product::getId() const {
     return id;
 }
 
-std::string Product::getExpd() {
+std::string Product::getExpd() const{
 
     return expiration;
 }
 
-std::string Product::getpName() {
+std::string Product::getpName() const{
     return name;
 }
 
@@ -41,7 +41,7 @@ void Product::setPrice(float precio) {
 
 }
 
-float Product::getPrice() {
+float Product::getPrice() const {
     return price;
 }
 

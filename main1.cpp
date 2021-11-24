@@ -6,7 +6,8 @@
 #include "User.h"
 #include "Store.h"
 #include <vector>
-
+#include <ostream>
+#include <fstream>
 
 
 using namespace std;
@@ -40,7 +41,10 @@ void showEmployeMenu();
 
 void showAdminMenu();
 
+
 //void echo(bool);
+
+void writeCsv(vector<Product> &upload);
 
 int main() {
     cout << "******************** Bienvenido a Grocery 0.1 ********************"<< endl;
@@ -63,16 +67,39 @@ while(firstTime){
        cout << "No se inició sesión correctamente" << endl;
     }
 
+// Creamos el csv con todas las modificaciones. Este csv emula una base de datos.
+    writeCsv(inventario);
 
     return 0;
 }
+
+void writeCsv(vector<Product> &upload) {
+    ofstream inventory;
+    inventory.open("inventory.csv");
+    inventory << "id"<<","<<"Nombre"<<","<<"Caducidad"<<","<<"Precio"<<endl;
+    for(int i = 0; i < upload.size() ; i++){
+
+        inventory << upload[i].getId() <<","<< upload[i].getpName()<<","<<upload[i].getExpd() <<","<<upload[i].getPrice()<<endl;
+
+    }
+    cout << "csv creado"<<endl;
+    // Aquí hacemos un truco, mandamos llamar un comando creado sólo para subir el archivo csv a una carpeta de drive.
+    //Esta carpeta será leida por python para la siguiente entrega.
+   // Actualización: No lo encuentra, supongo que es porque los alias se guardn en el bashrc
+   // Debería de modificar directamente el directorio bin
+   // O bien crear un bashscript y meterlo ahí
+   // Pero por el momento sólo copiaré el comando directamente
+    system("cp /home/guerrero/Documents/UNAM/3RD-SEMESTER/Computacion_I/ProyectoComp1.01/cmake-build-debug/inventory.csv /run/user/1000/gvfs/google-drive:host=gmail.com,user=joseguerrero21012/0AN6cFWrw0bztUk9PVA/1Os7QRywS4mzJBn2vnlHWc6wa-VR2H4C2/1iPro1zYdv-nHpI4uQa-izqxg6k9is6-0/19vWlAw-dATiGHERJWQBGgxbrUQFQaliu"); // El comando se llama upinv
+
+}
+
 
 void showAdminMenu() {
 int option;
 char regresar='y';
     cout << "Bienvenido " << usuarioActivoPTR->getUsrName() << ", estas son tus opciones disponibles: \n" << endl;
     while (regresar == 'y'){
-        cout << "Modo Administrador.\n[1] Registrar usuario\n[2] Actualizar precios\n[3] Vender productos\n[4] Editar Usuario\n[5] Añadir productos\n Ingresa la opcion: \n";
+        cout << "Modo Administrador.\n[1] Registrar usuario\n[2] Actualizar precios\n[3] Vender productos\n[4] Editar Usuario\n[5] Añadir productos\n [6] Salir\nIngresa la opcion: \n" <<endl;
         cin >> option;
 
 
@@ -102,6 +129,10 @@ char regresar='y';
                 cout << "¿Regresar al menú?[y/n]:" << endl;
                 cin >> regresar;
                 break;
+            case 6:
+                regresar = 'n';
+                break;
+
             default:
                 cout << "Por el momento sólo están esas opciones :)" << endl;
 
@@ -190,7 +221,7 @@ void createProduct() {
     std::string inExpiration;
     int inId;
     float inPrice;
-    cout << "Ingresa el nobre del producto: \n" <<endl;
+    cout << "Ingresa el nombre del producto: \n" <<endl;
     cin.ignore();
     getline(cin, inName);
     cout << "Ingresa el id: \n" << endl;
@@ -207,35 +238,34 @@ void createProduct() {
 
 };
 
-void createUser(){
+void createUser() {
     cout << "******** Registrar Usuario **********" << endl;
     std::string inNameU;
     std::string inPasswU;
     std::string inRepeatPass;
     char admin;
-    cout << "Ingresa el nobre del usuario: \n" <<endl;
+    cout << "Ingresa el nombre del usuario: \n" << endl;
     cin.ignore();
     getline(cin, inNameU);
     cout << "Crea una contraseña: \n" << endl;
     usuarioActivoPTR->inputPassword(inPasswU);
-    cout << "Repite la contraseña:\n" <<endl;
+    cout << "Repite la contraseña:\n" << endl;
     usuarioActivoPTR->inputPassword(inRepeatPass);
 
-    if(inPasswU == inRepeatPass){
+    if (inPasswU == inRepeatPass) {
         User newUser{inNameU, inPasswU, false};
-       cout << "¿Hacer administrador? s:si, n:no" << endl;
-       cin >> admin;
-       newUser.makeAdmin(admin);
-       listaUsuarios.push_back(newUser);
+        cout << "¿Hacer administrador? s:si, n:no" << endl;
+        cin >> admin;
+        newUser.makeAdmin(admin);
+        listaUsuarios.push_back(newUser);
 
 
-    }else{
-        cout <<"Las contraseñas no coinciden, cancelando operación";
+    } else {
+        cout << "Las contraseñas no coinciden, cancelando operación";
     }
-
-
-
-
-
 }
+
+
+
+
 

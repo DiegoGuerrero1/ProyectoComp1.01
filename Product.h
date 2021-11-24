@@ -27,10 +27,10 @@ public:
     void setExpd(std::string);
     void setpName(std::string);
     void setPrice(float);
-    int getId();
-    std::string getExpd();
-    std::string getpName();
-    float getPrice();
+    int getId() const;
+    std::string getExpd() const;
+    std::string getpName() const;
+    float getPrice() const;
 
 
 private:
