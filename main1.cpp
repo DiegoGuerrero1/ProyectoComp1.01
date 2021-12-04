@@ -8,6 +8,7 @@
 #include <vector>
 #include <ostream>
 #include <fstream>
+#include <algorithm>
 
 
 using namespace std;
@@ -77,7 +78,7 @@ void writeCsv(vector<Product> &upload) {
     ofstream inventory;
     inventory.open("inventory.csv");
     inventory << "id"<<","<<"Nombre"<<","<<"Caducidad"<<","<<"Precio"<<endl;
-    for(int i = 0; i < upload.size() ; i++){
+    for(int i = 0; i <= upload.size() ; i++){
 
         inventory << upload[i].getId() <<","<< upload[i].getpName()<<","<<upload[i].getExpd() <<","<<upload[i].getPrice()<<endl;
 
@@ -166,7 +167,7 @@ void showCeroScreen() {
     string pass;
 
     pass = usuarioActivoPTR->getpass("Es la primera vez que usas Grocery, por favor ingresa la constraseña del administrador default",
-                                     true);
+                                     true); // Usamos funcion getpass para que no se vea la contraseña
 
     if(adminDefault.isThePasword(pass)){
         createUser();
@@ -193,14 +194,14 @@ void login() {
     cin.ignore();
     getline(cin, nameUserSearch);
 
+
     for(auto & listaUsuario : listaUsuarios){
         onlyNames.push_back(listaUsuario.getUsrName());
     }
     it = find(onlyNames.begin(), onlyNames.end(), nameUserSearch);
     if (it != onlyNames.end())
     {
-        cout << "Ingresa la contraseña:\n" <<endl;
-        usuarioActivoPTR->inputPassword(password);
+        password = usuarioActivoPTR->getpass("Ingresa la contraseña:",true);
 
         if(listaUsuarios[it- onlyNames.begin()].isThePasword(password)){
             usuarioActivoPTR = &listaUsuarios[it - onlyNames.begin()]; // Asignamos que el usuario encontrado ahora es el usuario activo
@@ -233,8 +234,8 @@ void createProduct() {
     cin >> inPrice ;
     Product product{inId,inName,inExpiration,inPrice};
     inventario.push_back(product); //Se agrega al inventario
-// NOTA: al finalizar este método dice que se eliminó el objeto, esto es verdad, pero pasamos una copia al vector de lista de usuarios.
-// Por lo tanto se creó, se copió a la lista y se eliminó el original
+// NOTA: al finalizar este método dice que se eliminó el objeto. Pero pasamos una copia al vector de lista de usuarios.
+// Por lo tanto se creó, se copió a la lista y se eliminó el original.
 
 };
 
@@ -247,10 +248,8 @@ void createUser() {
     cout << "Ingresa el nombre del usuario: \n" << endl;
     cin.ignore();
     getline(cin, inNameU);
-    cout << "Crea una contraseña: \n" << endl;
-    usuarioActivoPTR->inputPassword(inPasswU);
-    cout << "Repite la contraseña:\n" << endl;
-    usuarioActivoPTR->inputPassword(inRepeatPass);
+    inPasswU = usuarioActivoPTR->getpass("Crea una contraseña:", true);
+    inRepeatPass = usuarioActivoPTR->getpass("Repite la contraseña", true);
 
     if (inPasswU == inRepeatPass) {
         User newUser{inNameU, inPasswU, false};
