@@ -25,6 +25,8 @@ vector<Product> inventario;
 bool firstTime = true;
 bool correctLogin = false;
 vector<Product*> carritoAct;
+bool log;
+char regresar;
 
 
 
@@ -48,6 +50,7 @@ void showAdminMenu();
 void writeCsv(vector<Product> &upload);
 
 int main() {
+
     cout << "******************** Bienvenido a Grocery 0.1 ********************"<< endl;
    // Pantalla 0. No se ha usado el programa anteriormente.
     //       Registrar usuairo nuevo.
@@ -57,6 +60,7 @@ while(firstTime){
 }
 //Iniciamos sesión
 
+do{
     login();
     if (correctLogin){
         if (!usuarioActivoPTR->isAdmin()) {
@@ -65,8 +69,10 @@ while(firstTime){
             showAdminMenu();
         }
     } else {
-       cout << "No se inició sesión correctamente" << endl;
+        cout << "No se inició sesión correctamente" << endl;
     }
+} while(log);
+
 
 // Creamos el csv con todas las modificaciones. Este csv emula una base de datos.
     writeCsv(inventario);
@@ -90,56 +96,75 @@ void writeCsv(vector<Product> &upload) {
    // Debería de modificar directamente el directorio bin
    // O bien crear un bashscript y meterlo ahí
    // Pero por el momento sólo copiaré el comando directamente
-    system("cp /home/guerrero/Documents/UNAM/3RD-SEMESTER/Computacion_I/ProyectoComp1.01/cmake-build-debug/inventory.csv /run/user/1000/gvfs/google-drive:host=gmail.com,user=joseguerrero21012/0AN6cFWrw0bztUk9PVA/1Os7QRywS4mzJBn2vnlHWc6wa-VR2H4C2/1iPro1zYdv-nHpI4uQa-izqxg6k9is6-0/19vWlAw-dATiGHERJWQBGgxbrUQFQaliu"); // El comando se llama upinv
 
 }
 
 
 void showAdminMenu() {
 int option;
-char regresar='y';
-    cout << "Bienvenido " << usuarioActivoPTR->getUsrName() << ", estas son tus opciones disponibles: \n" << endl;
-    while (regresar == 'y'){
-        cout << "Modo Administrador.\n[1] Registrar usuario\n[2] Actualizar precios\n[3] Vender productos\n[4] Editar Usuario\n[5] Añadir productos\n [6] Salir\nIngresa la opcion: \n" <<endl;
+
+
+    do{
+        cout << "Bienvenido " << usuarioActivoPTR->getUsrName() << ", estas son tus opciones disponibles: \n" << endl;
+        cout << "Modo Administrador.\n[1] Registrar usuario\n[2] Actualizar precios\n[3] Vender productos\n[4] Editar Usuario\n[5] Añadir productos\n[6] Iniciar otra sesión \n[7] Salir\n" << "Ingresa la opcion: \n" <<endl;
         cin >> option;
-
-
+        regresar = 'n';
         switch (option) {
             case 1:
-                createUser();
-                cout << "¿Regresar al menú?[y/n]:" << endl;
-                cin >> regresar;
+                while (regresar == 'n') {
+                    createUser();
+
+                    cout << "¿Regresar al menú?[y/n]:" << endl;
+                    cin >> regresar;
+                }
                 break;
             case 2:
-                usuarioActivoPTR->editPrice(inventario);
-                cout << "¿Regresar al menú?[y/n]:" << endl;
-                cin >> regresar;
+                while (regresar == 'n') {
+                    usuarioActivoPTR->editPrice(inventario);
+                    cout << "¿Regresar al menú?[y/n]:" << endl;
+                    cin >> regresar;
+                }
+
                 break;
             case 3:
+                while (regresar == 'n') {
                 usuarioActivoPTR->sellProducts(inventario, carritoAct);
                 cout << "¿Regresar al menú?[y/n]:" << endl;
                 cin >> regresar;
+                }
                 break;
             case 4:
-                usuarioActivoPTR->editUser();
-                cout << "¿Regresar al menú?[y/n]:" << endl;
-                cin >> regresar;
+                while(regresar == 'n'){
+                    usuarioActivoPTR->editUser();
+                    cout << "¿Regresar al menú?[y/n]:" << endl;
+                    cin >> regresar;
+                }
+
                 break;
             case 5:
-                createProduct();
-                cout << "¿Regresar al menú?[y/n]:" << endl;
-                cin >> regresar;
+                while(regresar == 'n'){
+                    createProduct();
+                    cout << "¿Regresar al menú?[y/n]:" << endl;
+                    cin >> regresar;
+                }
+
                 break;
             case 6:
+                log = true;
+                break;
+
+            case 7:
                 regresar = 'n';
                 break;
 
             default:
                 cout << "Por el momento sólo están esas opciones :)" << endl;
+                regresar = 'y';
+                break;
 
         }
 
-    }
+    }while (regresar == 'y');
 
 }
 
@@ -152,6 +177,7 @@ void showEmployeMenu() {
     switch (option) {
         case 1:
             usuarioActivoPTR->sellProducts(inventario, carritoAct);
+
             break;
         case 2:
             usuarioActivoPTR->editUser();
@@ -170,6 +196,7 @@ void showCeroScreen() {
                                      true); // Usamos funcion getpass para que no se vea la contraseña
 
     if(adminDefault.isThePasword(pass)){
+
         createUser();
         cout << "Ahora crea un producto para empezar el inventario \n" << endl;
         createProduct();
@@ -190,23 +217,26 @@ void login() {
     vector<string> onlyNames;
     std::string nameUserSearch;
     string password;
-    cout << "Ingresa el nombre del Usuario: \n" <<endl;
+    cout << "Ingresa el nombre del Usuario:\n" <<endl;
     cin.ignore();
     getline(cin, nameUserSearch);
 
 
-    for(auto & listaUsuario : listaUsuarios){
-        onlyNames.push_back(listaUsuario.getUsrName());
+    for(auto & listaUsuario : listaUsuarios){  //Se realiza una búsqueda en la lista de usuarios
+        onlyNames.push_back(listaUsuario.getUsrName()); // Creamos un nuevo vector que contenga sólo nombres
+                                                        // Es mpas sencillo buscarlo si es un vector con sólo strings
     }
     it = find(onlyNames.begin(), onlyNames.end(), nameUserSearch);
     if (it != onlyNames.end())
     {
-        password = usuarioActivoPTR->getpass("Ingresa la contraseña:",true);
+        password = usuarioActivoPTR->getpass("Ingresa la contraseña:",true); // Pedimos que ingrese la constraseña con getpass.
 
-        if(listaUsuarios[it- onlyNames.begin()].isThePasword(password)){
+        if(listaUsuarios[it- onlyNames.begin()].isThePasword(password)){ // Se valida la constraseña
             usuarioActivoPTR = &listaUsuarios[it - onlyNames.begin()]; // Asignamos que el usuario encontrado ahora es el usuario activo
             correctLogin = true;
-       }
+       }else{
+            cout << "Contraseña incorrecta" << endl;
+        }
 
     }
     else {
@@ -214,7 +244,7 @@ void login() {
         correctLogin = false;
 
     }
-} //Debería estar dentro de una clase
+}
 
 void createProduct() {
     cout << "*********** Crear producto ***********" << endl;
@@ -246,17 +276,23 @@ void createUser() {
     std::string inRepeatPass;
     char admin;
     cout << "Ingresa el nombre del usuario: \n" << endl;
-    cin.ignore();
+
+    if(!firstTime) cin.ignore(); // Es un parche: En la pantalla cero, si se coloca el cin.ignore omite la primero letra.
+                                // Pero fuera de esta pantalla lo necesita para omitir el salto de línea.
+
     getline(cin, inNameU);
+
     inPasswU = usuarioActivoPTR->getpass("Crea una contraseña:", true);
     inRepeatPass = usuarioActivoPTR->getpass("Repite la contraseña", true);
 
+
     if (inPasswU == inRepeatPass) {
-        User newUser{inNameU, inPasswU, false};
+        User* nuserPTR = new User{inNameU, inPasswU, false};
+        //User newUser{inNameU, inPasswU, false};
         cout << "¿Hacer administrador? s:si, n:no" << endl;
         cin >> admin;
-        newUser.makeAdmin(admin);
-        listaUsuarios.push_back(newUser);
+        nuserPTR->makeAdmin(admin);
+        listaUsuarios.push_back(*nuserPTR);
 
 
     } else {

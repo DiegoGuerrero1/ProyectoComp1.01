@@ -5,7 +5,7 @@
 #include "User.h"
 #include <string>
 #include <termios.h>
-#include <stdio.h>
+#include <cstdio>
 #include <unistd.h>
 #include <iostream>
 
@@ -99,7 +99,7 @@ Product & User::findProductbyId(vector<Product> &inventario) { // No se si se po
 
     if (it != searchId.end()) {
         productoFoundIndex = it - searchId.begin();
-        cout << "Producto con id " << idSearch << " encontrado en la posición: " << endl;
+        cout << "Producto " << inventario[productoFoundIndex].getpName() << " con id " << idSearch << " encontrado en la posición: " << endl;
         cout << productoFoundIndex << " (countando desde cero) \n" << endl;
         return inventario[productoFoundIndex];
 
@@ -185,12 +185,10 @@ void User::editUser() {
     char repetir='y';
     cout << "*********** Editar Usuario *********** \n";
     while (repetir == 'y') {
-        cout << "Ingresa tu contraseña\n" << endl;
         cin.ignore();
-        getline(cin, oldPassword);
+        oldPassword = getpass("Ingresa tu contraseña:", true);
         if (isThePasword(oldPassword)) {
             cout << "¿Qué quieres cambiar? \n [1] Contraseña [2] Nombre de Usuario" << endl;
-
             cin >> option;
             switch (option) {
                 case 1:
@@ -206,13 +204,12 @@ void User::editUser() {
                     cin.ignore();
                     getline(cin, newName);
                     name = newName;
-                    cout << "Nombre cambiado exitosamente a " << name << endl;
-                    cout << "Contraseña cambiada exitosamente\n" << "¿Realizar más cambios? [y/n]:" << endl;
+                    cout << "Nombre cambiado exitosamente a " << name << ". ¿Realizar más cambios? [y/n]:" << endl;
                     cin >> repetir;
                     break;
                 default:
                     cout << "Opción no válida\n" << endl;
-                    cout << "Contraseña cambiada exitosamente\n" << "¿Realizar más cambios? [y/n]:" << endl;
+                    cout <<"¿Realizar más cambios? [y/n]:" << endl;
                     cin >> repetir;
                     break;
             }
@@ -251,7 +248,7 @@ cout << "Usuario " << getUsrName() << " eliminado" << endl;
 }
 
 // Tratando de hacer la contraseña invisible
-int User:: getch() {
+int User:: getch() { //Creamos una función getch para usarla posteriormente.
     int ch;
     struct termios t_old, t_new;
 
