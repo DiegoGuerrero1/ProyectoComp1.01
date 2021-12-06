@@ -129,8 +129,8 @@ void User::sellProducts(vector<Product> &inventario, vector<Product*> &cart) {
 
     } while (agregarMas == 'y');
 
-        for(auto & cart : cart){
-            sellBill += cart->getPrice();
+        for(auto & i : cart){
+            sellBill += i->getPrice();
 
         }
         /*for( int i = 0 ; i <= cart.size(); i++){ //Para sacar la cuenta se usa un ciclo for que va sacando y sumando los precios de los productos del carrito
@@ -143,11 +143,11 @@ void User::sellProducts(vector<Product> &inventario, vector<Product*> &cart) {
 
     cout << "¿Pago recibido? [y/n]:" << endl;
     cin >> carritoVendido;
-    if (carritoVendido == 'y'){
-        for (unsigned int i = 0; i <= cart.size(); i++) {
-            delete cart[i]; // Como se vendieron los productos, se eliminan del inventario original por medio de su apuntador
-
+    if (carritoVendido == 'y'){ //Aquí estaba el error
+        for (auto & i : cart) {
+            i->~Product();
         }
+        cart.erase(cart.begin(),cart.end());
     }else{
         cout << "Operación cancelada" << endl;
         vaciarCarrito(cart);

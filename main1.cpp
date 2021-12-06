@@ -24,7 +24,7 @@ vector<Product> inventario; // Un vector con productos es el inventario.
 bool firstTime = true; // sirve para saber si mostrar la pantalla cero (no se ha creado usuairos).
 bool correctLogin = false; // Se usa para validar el correcto incio de sesión.
 vector<Product*> carritoAct; // El carrito es un vector de apuntadores. Apunta que productos queremos comprar.
-bool log = true; // Variable para activar un nuevo inicio de sesión.
+bool inic = false; // Variable para activar un nuevo inicio de sesión.
 char regresar= 'y'; // Variable para indicar un retorno al menú principal.
 
 
@@ -50,20 +50,16 @@ while(firstTime){ // Pantalla 0. No se ha usado el programa anteriormente.
 
 // Se inicia sesión
 
-while (log){ //Mientras la variable de incio de sesión sea verdadera, se activará el inicio de sesión.
-    login(); //Llamamos al método login().
-    if (correctLogin){ // Si se inició correctamente entonces procede a mostrar los menús.
-        if (!usuarioActivoPTR->isAdmin()) { // Validamos quie el usuario activo sea administrador
-            showEmployeMenu(); // Es administrador, menú completo.
-        } else {
-            showAdminMenu(); // No es administrador, menú limitado.
-        }
-    } else {
-        cout << "No se inició sesión correctamente" << endl;
-    }
-
-}
-
+ //Mientras la variable de incio de sesión sea verdadera, se activará el inicio de sesión
+     if (correctLogin) { // Si se inició correctamente entonces procede a mostrar los menús.
+         if (!usuarioActivoPTR->isAdmin()) { // Validamos quie el usuario activo sea administrador
+             showEmployeMenu(); // Es administrador, menú completo.
+         } else {
+             showAdminMenu(); // No es administrador, menú limitado.
+         }
+     } else {
+         cout << "No se inició sesión correctamente" << endl;
+     }
 
 // Creamos el csv con todas las modificaciones. Este csv emula una base de datos.
     writeCsv(inventario);
@@ -145,14 +141,7 @@ int option; //Variable para el switch
                 log = true; // Asignamos el valor de verdadero, para que cuando se salga del siwtch repita la función de login()
                 break;
 
-            case 7:
-                regresar = 'n'; // Para poder salir del ciclo while y continuar en el main.
-                break;
 
-            default:
-                cout << "Por el momento sólo están esas opciones :)" << endl;
-                regresar = 'y'; // Regresar al menú
-                break;
 
         }
 
@@ -250,7 +239,6 @@ void login() {
         correctLogin = false;
 
     }
-    log = false; //Para que no vuelva a inciar sesión a menos que el usuario lo indique
 }
 
 void createProduct() {
