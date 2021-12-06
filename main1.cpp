@@ -17,7 +17,7 @@ using namespace std;
 void addFirstProduct();
 
 // Variables globales
-User adminDefault; // De aquí viene la contrasela defauilt.
+User adminDefault; // De aquí viene la contraseña default.
 User* usuarioActivoPTR = &adminDefault; // Es el apuntador que nos dice qué usuario es el activo.
 vector<User> listaUsuarios; //La lista de todos los usuarios. Se pasa por valor ya que queremos copias.
 vector<Product> inventario; // Un vector con productos es el inventario.
@@ -25,19 +25,19 @@ bool firstTime = true; // sirve para saber si mostrar la pantalla cero (no se ha
 bool correctLogin = false; // Se usa para validar el correcto incio de sesión.
 vector<Product*> carritoAct; // El carrito es un vector de apuntadores. Apunta que productos queremos comprar.
 bool inic = false; // Variable para activar un nuevo inicio de sesión.
-char regresar= 'y'; // Variable para indicar un retorno al menú principal.
-
+char regresar= 'n'; // Variable para indicar un retorno al menú principal.
+bool userCreated; // Variable para indicar que se creó el usuario correctamente.
 
 
 // Declaraciones de Métodos del main();
 
-void createProduct();
-void createUser();
-void showCeroScreen();
-void login();
-void showEmployeMenu();
-void showAdminMenu();
-void writeCsv(vector<Product> &upload);
+void createProduct(); //Crea un producto nuevo
+void createUser(); //Crea un usuario nuevo. Esta función se ejecuta al inicio del programa
+void showCeroScreen(); //Esta es la primera función del programa, se inicia por defecto
+void login(); //Nos pide nombre y contraseña de un usuario para poder iniciar sesión
+void showEmployeMenu(); //Se muestra cuando el usuario no es administrador
+void showAdminMenu(); //Se muestra cuando el usuario es administrador
+void writeCsv(vector<Product> &upload); //Esta función crea un archivo de valores separados por comas del inventario
 
 
 
@@ -48,19 +48,22 @@ while(firstTime){ // Pantalla 0. No se ha usado el programa anteriormente.
         showCeroScreen();
 }
 
-// Se inicia sesión
+while(regresar == 'n'){
+    login(); //Llamamos al método login(). Se inicia sesión
 
- //Mientras la variable de incio de sesión sea verdadera, se activará el inicio de sesión
-     if (correctLogin) { // Si se inició correctamente entonces procede a mostrar los menús.
-         cout << "Bienvenido " << usuarioActivoPTR->getUsrName() << ", estas son tus opciones disponibles: \n" << endl;
-         if (!usuarioActivoPTR->isAdmin()) { // Validamos quie el usuario activo sea administrador
-             showEmployeMenu(); // Es administrador, menú completo.
-         } else {
-             showAdminMenu(); // No es administrador, menú limitado.
-         }
-     } else {
-         cout << "No se inició sesión correctamente" << endl;
-     }
+    if (correctLogin) { // Si se inició correctamente entonces procede a mostrar los menús.
+        regresar = 'y';
+        cout << "Bienvenido " << usuarioActivoPTR->getUsrName() << ", estas son tus opciones disponibles: \n" << endl;
+        if (!usuarioActivoPTR->isAdmin()) { // Validamos quie el usuario activo sea administrador
+            showEmployeMenu(); // Es administrador, menú completo.
+        } else {
+            showAdminMenu(); // No es administrador, menú limitado.
+        }
+    } else {
+        cout << "No se inició sesión correctamente" << endl;
+    }
+}
+
 
 // Creamos el csv con todas las modificaciones. Este csv emula una base de datos.
     writeCsv(inventario);
@@ -72,17 +75,14 @@ while(firstTime){ // Pantalla 0. No se ha usado el programa anteriormente.
 // ************* IMPLEMENTACIÓN DE LAS FUNCIONES DEL MAIN ***********************************************************************************
 
 
-
 void writeCsv(vector<Product> &upload) {
     ofstream inventory;
     inventory.open("inventory.csv");
-    inventory << "id"<<","<<"Nombre"<<","<<"Caducidad"<<","<<"Precio"<<endl;
+    inventory << "ID"<<","<<"Nombre"<<","<<"Caducidad"<<","<<"Precio"<<endl;
     for(int i = 0; i <= upload.size() ; i++){ //Escirbimos el csv.
         inventory << upload[i].getId() <<","<< upload[i].getpName()<<","<<upload[i].getExpd() <<","<<upload[i].getPrice()<<endl;
-
     }
-    cout << "csv creado"<<endl;
-
+    cout << "Archivo csv creado"<<endl;
 } // Función para generar un csv para posteriormente procesarlo con python.
 
 
@@ -92,75 +92,81 @@ int option; //Variable para el switch
     while(regresar == 'y'){
 
         cout << "Modo Administrador.\n[1] Registrar usuario\n[2] Actualizar precios\n[3] "
-                "Vender productos\n[4] Editar Usuario\n[5] Añadir productos\n"
-                "[6] Iniciar otra sesión \n[7] Salir\n" << "Ingresa la opcion: \n" <<endl;
+                "Vender productos\n[4] Editar Usuario\n[5] Agregar productos\n[6] Nuevo inicio de sesión\n" <<endl;
         cin >> option;
         regresar = 'n'; // Variable para generar un loop en cada opción y poder reutilizarla
         switch (option) {
             case 1: // Registrar usuario
                 while (regresar == 'n') {
                     createUser();
-                    cout << "¿Regresar al menú?[y/n]:" << endl;
-                    cin >> regresar;
-                }
-                break;
-            case 2:
-                while (regresar == 'n') {
-                    usuarioActivoPTR->editPrice(inventario); //Llamamos la función de editrar usuario
-                    cout << "¿Regresar al menú?[y/n]:" << endl;
-                    cin >> regresar;
-                }
-                writeCsv(inventario); //Guardamos cambios
-
-                break;
-            case 3:
-                while (regresar == 'n') {
-                usuarioActivoPTR->sellProducts(inventario, carritoAct); //Llamamos la función vender productos
-                cout << "¿Regresar al menú?[y/n]:" << endl;
-                cin >> regresar;
-                }
-                writeCsv(inventario);
-                break;
-            case 4:
-                while(regresar == 'n'){
-                    usuarioActivoPTR->editUser(); // Llamada a la función para editar usuario actual
-                    writeCsv(inventario);
                     cout << "Regresar al menú? [y/n]: \n" << endl;
                     cin >> regresar;
                 }
                 break;
+
+            case 2:
+                while (regresar == 'n') {
+                    usuarioActivoPTR->editPrice(inventario); //Llamamos la función de editrar usuario
+                    cout << "Regresar al menú? [y/n]: \n" << endl;
+                    cin >> regresar;
+                }
+                writeCsv(inventario); //Guardamos cambios
+                break;
+
+            case 3:
+                while (regresar == 'n') {
+                usuarioActivoPTR->sellProducts(inventario, carritoAct); //Llamamos la función vender productos
+                cout << "Regresar al menú? [y/n]: \n" << endl;
+                cin >> regresar;
+                }
+                writeCsv(inventario);
+                break;
+
+            case 4:
+                while(regresar == 'n'){
+                    usuarioActivoPTR->editUser(); // Llamada a la función para editar usuario actual
+                    cout << "Regresar al menú? [y/n]: \n" << endl;
+                    cin >> regresar;
+                }
+                    break;
+
             case 5:
                 while(regresar == 'n'){
                     createProduct(); //Fucnión para crear un producto
-                    cout << "¿Regresar al menú?[y/n]:" << endl;
+                    cout << "Regresar al menú? [y/n]: \n" << endl;
                     cin >> regresar;
                 }
                 writeCsv(inventario);
                 break;
+
             case 6:
-                log = true; // Asignamos el valor de verdadero, para que cuando se salga del siwtch repita la función de login()
+                    regresar = 'n'; //Sólo asignamos la letra n a la variable regresar para romper con el loop del menú
+                                    // E iniciar el loop de antes del menú
+                    break;
+            case 7:
+                regresar = 'c';
                 break;
 
-
-
+            default:
+                cout << "Por el momento sólo están esas opciones :)" << endl;
+                regresar = 'y'; // Regresar al menú
+                break;
+                }
         }
-
     }
 
-}
 
 void showEmployeMenu() { // Mostrar el menú inclopeto
     int option;
     regresar = 'y';
 
     while (regresar == 'y'){
-        cout << "Bienvenido " << usuarioActivoPTR->getUsrName() << ", estas son tus opciones disponibles: \n" << endl;
-        cout << "Modo Empleado.\n[1] Vender productos\n[2] Editar Usuario\n Ingresa la opcion:\n";
-        cin.ignore();
+        cout << "Modo Empleado.\n[1] Vender productos\n[2] Editar Usuario\n Ingresa la opcion:\n[3] Iniciar otra sesión"<<endl;
         cin >> option;
+        regresar = 'n';
         switch (option) {
             case 1:
-                while (regresar == 'y'){
+                while (regresar == 'n'){
                     usuarioActivoPTR->sellProducts(inventario, carritoAct);
                     cout << "¿Regresar al menú?[y/n]"<<endl;
                     cin >> regresar;
@@ -168,11 +174,14 @@ void showEmployeMenu() { // Mostrar el menú inclopeto
 
                 break;
             case 2:
-                while(regresar == 'y'){
+                while(regresar == 'n'){
                     usuarioActivoPTR->editUser();
                     cout << "¿Regresar al menú?[y/n]"<<endl;
                     cin >> regresar;
                 }
+                break;
+            case 3:
+                regresar = 'n';
                 break;
 
             default:
@@ -187,30 +196,30 @@ void showEmployeMenu() { // Mostrar el menú inclopeto
 void showCeroScreen() {
 
     string pass; //Contraseña a probar
-
-    pass = usuarioActivoPTR->getpass("Es la primera vez que usas Grocery, por favor ingresa la constraseña del administrador default",
+    pass = usuarioActivoPTR->getpass("Es la primera vez que usas Grocery, por favor ingresa la constrasenia del administrador default: \n",
                                      true); // Usamos funcion getpass para que no se vea la contraseña
 
     if(adminDefault.isThePasword(pass)){
         createUser(); //Se crea un usuairo para empezar la lista de usuarios y no usar la del administrador default
-        cout << "Ahora crea un producto para empezar el inventario \n" << endl;
-        createProduct();
-        firstTime = false;
+        if (userCreated){
+            cout << "Ahora crea un producto para empezar el inventario, \n" << endl;
+            createProduct();
+            firstTime = false;
+        }else{
+            cout << "Registro Fallido\n" << endl;
+        }
 
-    }else{
-        cout << "Contraseña incorrecta" << endl;
 
+    } else{
+        cout << "Contrasenia incorrecta. Intente de nuevo mas tarde.\n" << endl;
     }
-
-
-
 }
 
 void login() {
     cout << "********** Iniciar Sesión *********" <<endl;
-    std::vector<string>::iterator it;
+    vector<string>::iterator it;
     vector<string> onlyNames;
-    std::string nameUserSearch;
+    string nameUserSearch;
     string password;
     cout << "Ingresa el nombre del Usuario:\n" <<endl;
     cin.ignore();
@@ -230,7 +239,7 @@ void login() {
             usuarioActivoPTR = &listaUsuarios[it - onlyNames.begin()]; // Asignamos que el usuario encontrado ahora es el usuario activo
             correctLogin = true;
        }else{
-            cout << "Contraseña incorrecta" << endl;
+            cout << "Contraseña incorrecta. Intente de nuevo mas tarde. \n" << endl;
         }
 
     }
@@ -243,8 +252,8 @@ void login() {
 
 void createProduct() {
     cout << "*********** Crear producto ***********" << endl;
-    std::string inName;
-    std::string inExpiration;
+    string inName;
+    string inExpiration;
     int inId;
     float inPrice;
     cout << "Ingresa el nombre del producto: \n" <<endl;
@@ -265,10 +274,8 @@ void createProduct() {
 };
 
 void createUser() {
-    cout << "******** Registrar Usuario **********" << endl;
-    std::string inNameU;
-    std::string inPasswU;
-    std::string inRepeatPass;
+    cout << "\t\t******** Registrar Usuario **********" << endl;
+    string inNameU, inPasswU, inRepeatPass;
     char admin;
     cout << "Ingresa el nombre del usuario: \n" << endl;
 
@@ -282,16 +289,16 @@ void createUser() {
 
 
     if (inPasswU == inRepeatPass) {
-        User* nuserPTR = new User{inNameU, inPasswU, false};
+        User nuserPTR = User{inNameU, inPasswU, false};
         //User newUser{inNameU, inPasswU, false};
-        cout << "¿Hacer administrador? s:si, n:no" << endl;
+        cout << "Hacer administrador? s:si, n:no" << endl;
         cin >> admin;
-        nuserPTR->makeAdmin(admin);
-        listaUsuarios.push_back(*nuserPTR);
-
+        nuserPTR.makeAdmin(admin);
+        listaUsuarios.push_back(nuserPTR);
+        userCreated = true;
 
     } else {
-        cout << "Las contraseñas no coinciden, cancelando operación";
+        cout << "Las contraseñas no coinciden, cancelando operación. \n";
     }
 }
 

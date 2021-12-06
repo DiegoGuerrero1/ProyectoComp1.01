@@ -1,5 +1,5 @@
 # ProyectoComp1.01
-Repositorio donde se aloja el código fuente de la primera entrega del proyecto para la materia de Computación 1. 
+Repositorio donde se aloja el código fuente de la entrega del proyecto para la materia de Computación 1. 
 
 ## Integrantes: 
 1. Diego Guerrero
@@ -17,15 +17,17 @@ _Todos los commits se realizaron al máster, no al main__
 2. Pantalla 2. Se inició sesión
    1. Pantalla 2.1 Es admin
        1. Registrar Usuario
-       2. Editar Precios
+       2. Actualizar Precios
        3. Vender Productos
        4. Editar usuario
+       5. Agregar productos
+       6. Iniciar otra sesión
    2. Pantalla 2.2 No es admin
        5. Vender Productos
-       6. Ver inventario
        7. Editar Usuario
            1. Editar Nombre
            2. Editar contraseña
+      
 
 ## Fecha de entrega
 Miércoles 20 de Octubre del 2021

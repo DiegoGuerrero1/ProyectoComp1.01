@@ -179,37 +179,46 @@ void User::editUser() {
     std::string newName;
     std::string newPassword;
     std::string oldPassword;
-    char repetir='y';
-    cout << "*********** Editar Usuario *********** \n";
+    char editar = 'y';
+
+        cout << "*********** Editar Usuario *********** \n";
         cin.ignore();
         oldPassword = getpass("Ingresa tu contraseña:", true);
         if (isThePasword(oldPassword)) {
-            cout << "¿Qué quieres cambiar? \n [1] Contraseña [2] Nombre de Usuario" << endl;
-            cin >> option;
-            switch (option) {
-                case 1:
-                    cin.ignore();
-                    password = getpass("Ingresa la nueva contraseña", true);
-                    cout << "Contraseña cambiada exitosamente\n" << "¿Realizar más cambios? [y/n]:" << endl;
-                    cin >> repetir;
-                    break;
-                case 2:
-                    cout << "Ingresa el nuevo nombre\n" << endl;
-                    cin.ignore();
-                    getline(cin, newName);
-                    name = newName;
-                    cout << "Nombre cambiado exitosamente a " << name << ". ¿Realizar más cambios? [y/n]:" << endl;
-                    cin >> repetir;
-                    break;
-                default:
-                    cout << "Opción no válida\n" << endl;
-                    break;
+            while(editar == 'y'){
+                cout << "¿Qué quieres cambiar? \n [1] Contraseña [2] Nombre de Usuario" << endl;
+                cin >> option;
+                switch (option) {
+                    case 1:
+                        cin.ignore();
+                        newPassword = getpass("Ingresa la nueva contraseña", true);
+                        setPassword(newPassword);
+                        cout << "Contraseña cambiada exitosamente\n" << endl;
+                        cout << "¿Seguir editando? [y/n]: \n" << endl;
+                        cin >> editar;
+                        break;
+                    case 2:
+                        cout << "Ingresa el nuevo nombre\n" << endl;
+                        cin.ignore();
+                        getline(cin, newName);
+                        setuName(newName);
+                        cout << "Nombre cambiado exitosamente a " << name << endl;
+                        cout << "'¿Seguir editando? [y/n]: \n" << endl;
+                        cin >> editar;
+                        break;
+                    default:
+                        cout << "Opción no válida\n" << endl;
+                        editar = 'n';
+                        break;
+                }
             }
 
         } else {
             cout << "Contraseña incorrecta" << endl;
+            editar = 'n';
         }
-}
+    }
+
 
 void User::addProducts(Product newProduct, vector<Product> inventory) {
     inventory.push_back(newProduct);
