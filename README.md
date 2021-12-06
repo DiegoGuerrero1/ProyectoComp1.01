@@ -1,5 +1,12 @@
-# ProyectoComp1.01
-Repositorio donde se aloja el código fuente de la entrega del proyecto para la materia de Computación 1. 
+# Proyecto Final Computación I.
+
+**UNAM - ENES J Licenciautra en Tecnología.** 
+
+Este es un repositorio donde se aloja el código fuente de la entrega final del proyecto para la materia de Computación 1.
+
+Creación de un programa que condense los temas que se impartieron en el curso. 
+Usando los lenguajes de programación C++ y Python en conjunto. 
+
 
 ## Integrantes: 
 1. Diego Guerrero
@@ -31,3 +38,4 @@ _Todos los commits se realizaron al máster, no al main__
 
 ## Fecha de entrega
 Lunes 06 de Diciembre del 2021
+![UNAM](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.freebiesupply.com%2Flogos%2Flarge%2F2x%2Funam-logo-png-transparent.png&f=1&nofb=1)
