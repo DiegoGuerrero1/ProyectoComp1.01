@@ -23,11 +23,11 @@ _Todos los commits se realizaron al máster, no al main__
        5. Agregar productos
        6. Iniciar otra sesión
    2. Pantalla 2.2 No es admin
-       5. Vender Productos
-       7. Editar Usuario
-           1. Editar Nombre
-           2. Editar contraseña
-      
+      1. Vender Productos
+      2. Editar Usuario
+          1. Editar Nombre
+          2. Editar contraseña
+
 
 ## Fecha de entrega
-Miércoles 20 de Octubre del 2021
+Lunes 06 de Diciembre del 2021
