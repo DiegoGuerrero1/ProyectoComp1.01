@@ -92,7 +92,7 @@ int option; //Variable para el switch
     while(regresar == 'y'){
 
         cout << "Modo Administrador.\n[1] Registrar usuario\n[2] Actualizar precios\n[3] "
-                "Vender productos\n[4] Editar Usuario\n[5] Agregar productos\n[6] Nuevo inicio de sesión\n" <<endl;
+                "Vender productos\n[4] Editar Usuario\n[5] Agregar productos\n[6] Nuevo inicio de sesión\n"<<endl;
         cin >> option;
         regresar = 'n'; // Variable para generar un loop en cada opción y poder reutilizarla
         switch (option) {
@@ -161,7 +161,7 @@ void showEmployeMenu() { // Mostrar el menú inclopeto
     regresar = 'y';
 
     while (regresar == 'y'){
-        cout << "Modo Empleado.\n[1] Vender productos\n[2] Editar Usuario\n Ingresa la opcion:\n[3] Iniciar otra sesión"<<endl;
+        cout << "Modo Empleado.\n[1] Vender productos\n[2] Editar Usuario \n[3] Iniciar otra sesión \nIngresa la opcion:\n"<<endl;
         cin >> option;
         regresar = 'n';
         switch (option) {
@@ -196,7 +196,7 @@ void showEmployeMenu() { // Mostrar el menú inclopeto
 void showCeroScreen() {
 
     string pass; //Contraseña a probar
-    pass = usuarioActivoPTR->getpass("Es la primera vez que usas Grocery, por favor ingresa la constrasenia del administrador default: \n",
+    pass = usuarioActivoPTR->getpass("Es la primera vez que usas Grocery, por favor ingresa la constraseña del administrador default: \n",
                                      true); // Usamos funcion getpass para que no se vea la contraseña
 
     if(adminDefault.isThePasword(pass)){
@@ -205,6 +205,7 @@ void showCeroScreen() {
             cout << "Ahora crea un producto para empezar el inventario, \n" << endl;
             createProduct();
             firstTime = false;
+
         }else{
             cout << "Registro Fallido\n" << endl;
         }

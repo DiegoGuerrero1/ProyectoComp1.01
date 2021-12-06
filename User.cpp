@@ -18,6 +18,10 @@ User::User(string userName, string userPassword, bool makeAdmin)
 User::User(): name{"Administrador Default"}, password{"compu"}, admin{true}{
     cout << "Usuario " <<getUsrName() << "\nAdministrador: "<< admin << endl;
 }
+User::~User() {
+    cout << "Usuario " << getUsrName() << " eliminado" << endl;
+
+}
 
 void User::makeAdmin(char madmin) {
     switch (madmin) {
@@ -225,10 +229,7 @@ void User::addProducts(Product newProduct, vector<Product> inventory) {
 }
 //La única opción que encontré para tomar una contraseña de input y que no se renderizara en la terminal fue desactivar echo desde el programa
 
-User::~User() {
-cout << "Usuario " << getUsrName() << " eliminado" << endl;
 
-}
 
 // Tratando de hacer la contraseña invisible
 int User:: getch() { //Creamos una función getch para usarla posteriormente.
