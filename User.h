@@ -34,8 +34,6 @@ public:
 
     void addtoCart(vector<Product> &inventario,vector<Product*> &cart);
     bool isAdmin();
-    void echo(bool on);
-    void inputPassword(string &pwrd);
 
     static Product & findProductbyId(vector<Product> &inventario);
     void sellProducts(vector<Product> &inventario, vector<Product*> &cart); //Regresará el total

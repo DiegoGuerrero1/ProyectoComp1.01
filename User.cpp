@@ -157,23 +157,20 @@ void User::sellProducts(vector<Product> &inventario, vector<Product*> &cart) {
 
 void User::editPrice(vector<Product> &inventario) {
     int idProducto;
-    char mientras;
     float nuevoPrecio = 0;
     Product* sellItemPTR; // Importante: tiene que ser un apuntador. Si no lo es, no se puede realizar esta operación.
 // No se puede devolver por valor ni por copia. Traté de crear otros vectores, sin embargo, tengo sospechas de que esop es la raíz de los bugs.
     if (!isAdmin()){
         cout << "El usuario no es administrador"<< endl;
     }else{
-        do {
+
             sellItemPTR = &findProductbyId(inventario);
             cout << "Precio actual del producto: " << sellItemPTR->getPrice() << endl;
             cout << "Ingrese el nuevo precio: \n";
             cin >> nuevoPrecio;
             sellItemPTR->setPrice(nuevoPrecio);
             cout << "Precio de " << sellItemPTR->getpName() << " cambiado a: "<< sellItemPTR->getPrice() << endl;
-            cout << "¿Continuar cambiando precios?[y/n]" << endl;
-            cin >> mientras;
-    } while (mientras=='y');
+
     }
 }
 
@@ -184,7 +181,6 @@ void User::editUser() {
     std::string oldPassword;
     char repetir='y';
     cout << "*********** Editar Usuario *********** \n";
-    while (repetir == 'y') {
         cin.ignore();
         oldPassword = getpass("Ingresa tu contraseña:", true);
         if (isThePasword(oldPassword)) {
@@ -192,10 +188,8 @@ void User::editUser() {
             cin >> option;
             switch (option) {
                 case 1:
-                    cout << "Ingresa la nueva contraseña\n" << endl;
                     cin.ignore();
-                    getline(cin, newPassword);
-                    password = newPassword;
+                    password = getpass("Ingresa la nueva contraseña", true);
                     cout << "Contraseña cambiada exitosamente\n" << "¿Realizar más cambios? [y/n]:" << endl;
                     cin >> repetir;
                     break;
@@ -215,32 +209,12 @@ void User::editUser() {
         } else {
             cout << "Contraseña incorrecta" << endl;
         }
-        cout <<"¿Realizar más cambios? [y/n]:" << endl;
-        cin >> repetir;
-    }
 }
 
 void User::addProducts(Product newProduct, vector<Product> inventory) {
     inventory.push_back(newProduct);
 }
 //La única opción que encontré para tomar una contraseña de input y que no se renderizara en la terminal fue desactivar echo desde el programa
-
-void User::echo(bool on = true) {
-    struct termios settings;
-    tcgetattr( STDIN_FILENO, &settings );
-    settings.c_lflag = on
-                       ? (settings.c_lflag |   ECHO )
-                       : (settings.c_lflag & ~(ECHO));
-    tcsetattr( STDIN_FILENO, TCSANOW, &settings );
-}
-
-void User::inputPassword(string &pwrd ) {
-    //echo(false);
-    cin.ignore();
-    getline(cin, pwrd);
-    //echo(true);
-
-}
 
 User::~User() {
 cout << "Usuario " << getUsrName() << " eliminado" << endl;

@@ -52,6 +52,7 @@ while(firstTime){ // Pantalla 0. No se ha usado el programa anteriormente.
 
  //Mientras la variable de incio de sesión sea verdadera, se activará el inicio de sesión
      if (correctLogin) { // Si se inició correctamente entonces procede a mostrar los menús.
+         cout << "Bienvenido " << usuarioActivoPTR->getUsrName() << ", estas son tus opciones disponibles: \n" << endl;
          if (!usuarioActivoPTR->isAdmin()) { // Validamos quie el usuario activo sea administrador
              showEmployeMenu(); // Es administrador, menú completo.
          } else {
@@ -89,7 +90,7 @@ void showAdminMenu() { // función para mostrar el menú de administrador
 int option; //Variable para el switch
 
     while(regresar == 'y'){
-        cout << "Bienvenido " << usuarioActivoPTR->getUsrName() << ", estas son tus opciones disponibles: \n" << endl;
+
         cout << "Modo Administrador.\n[1] Registrar usuario\n[2] Actualizar precios\n[3] "
                 "Vender productos\n[4] Editar Usuario\n[5] Añadir productos\n"
                 "[6] Iniciar otra sesión \n[7] Salir\n" << "Ingresa la opcion: \n" <<endl;
@@ -123,11 +124,10 @@ int option; //Variable para el switch
             case 4:
                 while(regresar == 'n'){
                     usuarioActivoPTR->editUser(); // Llamada a la función para editar usuario actual
-                    cout << "¿Regresar al menú?[y/n]:" << endl;
+                    writeCsv(inventario);
+                    cout << "Regresar al menú? [y/n]: \n" << endl;
                     cin >> regresar;
                 }
-                writeCsv(inventario);
-
                 break;
             case 5:
                 while(regresar == 'n'){
