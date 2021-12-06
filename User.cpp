@@ -209,14 +209,14 @@ void User::editUser() {
                     break;
                 default:
                     cout << "Opción no válida\n" << endl;
-                    cout <<"¿Realizar más cambios? [y/n]:" << endl;
-                    cin >> repetir;
                     break;
             }
 
         } else {
             cout << "Contraseña incorrecta" << endl;
         }
+        cout <<"¿Realizar más cambios? [y/n]:" << endl;
+        cin >> repetir;
     }
 }
 
